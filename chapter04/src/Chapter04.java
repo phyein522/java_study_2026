@@ -78,7 +78,7 @@ public class Chapter04 {
 		int select = 0;
 		int money = 0;
 		while(select != 4) {
-			printMessgae();
+			printMessage();
 			//select = Integer.parseInt(scanner.nextLine());
 			switch(select = Integer.parseInt(scanner.nextLine())) {
 				case 1:
@@ -102,7 +102,7 @@ public class Chapter04 {
 		while((select = Integer.parseInt(scanner.nextLine())) != 4) { }
 		*/
 	}
-	public void printMessgae() {
+	public void printMessage() {
 		System.out.println("\n----------------------------------------");
 		System.out.println("1. 예금 | 2. 출금 | 3. 잔고 | 4. 종료");
 		System.out.println("----------------------------------------");
@@ -167,5 +167,48 @@ public class Chapter04 {
 			System.out.println();
 			i++;
 		}
+	}
+
+	public void exerciseDoWhile() {
+		System.out.println("\n3. do while문을 이용해서 1부터 100까지의 정수 중에서 3의 배수의 총합 출력");
+		int sum = 0, num = 0;
+		do {
+			sum += num;
+			num += 3;
+		} while(num <= 100);
+		System.out.println(sum);
+
+		System.out.println("\n4. do while 문과 Math.random() 메소드를 이용해서, 두 개의 주사위를 던졌을 때 나오는 눈을 (눈1, 눈2) 형태로 출려갛고, 눈의 합이 5가 아니면 계속 주사위를 던지고, 눈의 합이 5이면 실행을 멈춤 (눈의 합이 5가 되는 경우: (1, 4), (4, 1), (2, 3), (3, 2))");
+		do {
+			int num1 = (int)(Math.random() * 6) + 1;
+			int num2 = (int)(Math.random() * 6) + 1;
+			System.out.println("(" + num1 + ", " + num2 + ")");
+			sum = num1 + num2;
+		} while(sum != 5);
+
+		System.out.println("\n5. 중첩 do while문을 이용하여, 방정식 4x + 5y = 60의 모든 해를 구해서, (x, y) 형태로 출력 (단, x와 y는 10 이하의 자연수)");
+		int x = 0;
+		do {
+			int y = 0;
+			do {
+				if(((4 * x) + (5 * y)) == 60) {
+					System.out.println("(" + x + ", " + y + ")");
+				}
+				y++;
+			} while(y <= 10);
+			x++;
+		} while(x <= 10);
+
+		System.out.println("\n6. do while 문을 이용");
+		int i = 1;
+		do {
+			int j = 0;
+			do {
+				System.out.print("*");
+				j++;
+			} while(j < i);
+			System.out.println();
+			i++;
+		} while(i <= 5);
 	}
 }
