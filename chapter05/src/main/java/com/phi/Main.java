@@ -17,5 +17,12 @@ public class Main {
 		ch5.subStringExample();
 		ch5.indexOfContainsExample();
 		ch5.splitExample();
+
+		ch5.arrayCreateByValueListExample1();
+		ch5.arrayCreateByValueListExample2();
+		ch5.arrayCreateByNewExample();
+		ch5.arrayLengthExample();
+		ch5.multidimensionalArrayByValueListExample();
+		ch5.multidimensionalArrayByNewExample();
 	}
 }
