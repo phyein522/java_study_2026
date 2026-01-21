@@ -1,5 +1,6 @@
 package com.phi;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Report0121 {
@@ -194,7 +195,16 @@ public class Report0121 {
 		Scanner scanner = new Scanner(System.in);
 		//int number = 3;	//임시
 		System.out.print("숫자 입력 (대각선 숫자): ");
-		int number = scanner.nextInt();
+		int number;
+		try {
+			number = scanner.nextInt();
+		} catch(InputMismatchException e) {
+			number = 3;
+		}
+		if(number < 0) {
+			number = 3;
+		}
+		//int number = scanner.nextInt();
 		int[][] nArray = new int[number][number];
 		for(int i = 0; i < number; i++) {
 			for(int j = 0; j < number; j++) {
@@ -214,7 +224,16 @@ public class Report0121 {
 		Scanner scanner = new Scanner(System.in);
 		//int number = 3;	//임시
 		System.out.print("숫자 입력 (사각형): ");
-		int number = scanner.nextInt();
+		int number;
+		try {
+			number = scanner.nextInt();
+		} catch(InputMismatchException e) {
+			number = 3;
+		}
+		if(number < 0) {
+			number = 3;
+		}
+		//int number = scanner.nextInt();
 		char[][] square = new char[number][number];
 		for(int i = 0; i < number; i++) {
 			for(int j = 0; j < number; j++) {
@@ -256,7 +275,19 @@ public class Report0121 {
 		Scanner scanner = new Scanner(System.in);
 		//int number = 5;
 		System.out.print("숫자 입력 (다이아몬드): ");
-		int number = scanner.nextInt();
+		int number;
+		try {
+			number = scanner.nextInt();
+		} catch(InputMismatchException e) {
+			number = 5;
+		}
+		if(number % 2 == 0) {
+			number++;
+		}
+		if(number < 0) {
+			number = 5;
+		}
+		//int number = scanner.nextInt();
 		char[][] chDiamond = new char[number][number];
 		int center = number / 2;
 		for(int i = 0; i < number; i++) {
