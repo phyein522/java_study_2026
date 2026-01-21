@@ -123,11 +123,11 @@ public class Report0121 {
 
 	public void exercise2() {
 		int[][] intDemention2 = {
+				{1, 0, 1, 0, 0, 1},
+				{1, 0, 1, 1, 0, 1},
+				{0, 1, 0, 1, 0, 0},
+				{1, 0, 0, 1, 0, 1},
 				{1, 0, 1, 0, 0, 1}
-				, {1, 0, 1, 1, 0, 1}
-				, {0, 1, 0, 1, 0, 0}
-				, {1, 0, 0, 1, 0, 1}
-				, {1, 0, 1, 0, 0, 1}
 		};
 		int[] count = new int[2];
 		for(int[] intDemention1 : intDemention2) {
@@ -167,16 +167,16 @@ public class Report0121 {
 	public static void main(String[] args) {
 		System.out.println();
 
-		Report0121 r = new Report0121();
-		r.booleanArray();
-		r.countZeroAndOne();
-		r.reverseRowCol();
+		Report0121 report = new Report0121();
+		report.booleanArray();
+		report.countZeroAndOne();
+		report.reverseRowCol();
 
 		System.out.println();
 
-		r.exercise1();
-		r.exercise2();
-		r.exercise3();
+		report.exercise1();
+		report.exercise2();
+		report.exercise3();
 
 		System.out.println();
 	}
