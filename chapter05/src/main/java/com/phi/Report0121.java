@@ -51,7 +51,7 @@ public class Report0121 {
 		System.out.printf("0의 갯수는 %d개, 1의 갯수는 %d개.\n", countZeroAndOne[0], countZeroAndOne[1]);
 	}
 
-	public void reverseRowCol(char[][] chInput) {
+	public void reverseRowCol() {
 		/*
 		- 3번 : 입력이 아래와 같을때 출력을 아래와 같이 만드세요
 		입력 =>
@@ -78,6 +78,75 @@ public class Report0121 {
 		* *
 		  *
 		*/
+		char[][] chInput = {
+				{'*', '*', '*', '*', ' '},
+				{'*', '*', ' ', ' ', ' '},
+				{'*', ' ', '*', '*', '*'}
+		};
+		int chInputRow = chInput.length;
+		int chInputCol = chInput[0].length;
+		char[][] chOutput = new char[chInputCol][chInputRow];
+		for(int col = 0; col < chInputCol; col++) {
+			for(int row = 0; row < chInputRow; row++) {
+				chOutput[col][row] = chInput[row][col];
+			}
+		}
+
+		for(char[] row : chOutput) {
+			for(char col : row) {
+				System.out.print(col);
+			}
+			System.out.println();
+		}
+	}
+
+	public void exercise1() {
+		int[] intArray = new int[30];
+		for(int i = 0; i < intArray.length; i++) {
+			intArray[i] = i;
+		}
+
+		char[] charArray = new char[20];
+
+		boolean[][] booleanArray = new boolean[3][4];
+		for(int i = 0; i < booleanArray.length; i++) {
+			for(int j = 0; j < booleanArray[i].length; j++) {
+				booleanArray[i][j] = true;
+			}
+		}
+
+		String[] stringArray = new String[50];
+		for(int i = 0; i < stringArray.length; i++) {
+			stringArray[i] = "empty";
+		}
+	}
+
+	public void exercise2() {
+		int[][] intDemention2 = {
+				{1, 0, 1, 0, 0, 1}
+				, {1, 0, 1, 1, 0, 1}
+				, {0, 1, 0, 1, 0, 0}
+				, {1, 0, 0, 1, 0, 1}
+				, {1, 0, 1, 0, 0, 1}
+		};
+		int[] count = new int[2];
+		for(int[] intDemention1 : intDemention2) {
+			for(int intDemention : intDemention1) {
+				count[intDemention]++;
+			}
+		}
+		System.out.printf("0의 갯수는 %d개, 1의 갯수는 %d개.\n", count[0], count[1]);
+	}
+
+	public void exercise3() {
+		char[][] chInput = {
+				{'*', ' ', '*', '*', ' '},
+				{'*', '*', ' ', ' ', ' '},
+				{'*', ' ', '*', ' ', '*'},
+				{' ', '*', '*', ' ', '*'},
+				{'*', ' ', '*', ' ', '*'},
+				{' ', ' ', '*', '*', '*'}
+		};
 		int chInputRow = chInput.length;
 		int chInputCol = chInput[0].length;
 		char[][] chOutput = new char[chInputCol][chInputRow];
@@ -101,12 +170,13 @@ public class Report0121 {
 		Report0121 r = new Report0121();
 		r.booleanArray();
 		r.countZeroAndOne();
-		char[][] chInput = {
-				{'*', '*', '*', '*', ' '},
-				{'*', '*', ' ', ' ', ' '},
-				{'*', ' ', '*', '*', '*'}
-		};
-		r.reverseRowCol(chInput);
+		r.reverseRowCol();
+
+		System.out.println();
+
+		r.exercise1();
+		r.exercise2();
+		r.exercise3();
 
 		System.out.println();
 	}
