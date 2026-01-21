@@ -1,5 +1,7 @@
 package com.phi;
 
+import java.util.Scanner;
+
 public class Report0121 {
 	public void booleanArray() {
 		/*
@@ -164,6 +166,113 @@ public class Report0121 {
 		}
 	}
 
+	public void arrayDoubleIntString() {
+		double[] dArray = new double[25];
+		for(int i = 0; i < dArray.length; i++) {
+			dArray[i] = Math.random() * 100;
+		}
+
+		int[] nArray = new int[dArray.length];
+		int sum = 0;
+		for(int i = 0; i < nArray.length; i++) {
+			nArray[i] = (int)dArray[i];
+			sum += nArray[i];
+		}
+		System.out.printf("합: %d \n평균: %f \n\n", sum, ((double)sum/ nArray.length));
+
+		String[] strArray = new String[dArray.length];
+		for(int i = 0; i < strArray.length; i++) {
+			strArray[i] = dArray[i] + " => " + nArray[i];
+		}
+
+		for(int i = 0; i < strArray.length; i += 5) {
+			System.out.printf("%-25s \t%-25s \t%-25s \t%-25s \t%-25s \n", strArray[i], strArray[i+1], strArray[i+2],strArray[i+3], strArray[i+4]);
+		}
+	}
+
+	public void slashNumber() {
+		Scanner scanner = new Scanner(System.in);
+		//int number = 3;	//임시
+		System.out.print("숫자 입력 (대각선 숫자): ");
+		int number = scanner.nextInt();
+		int[][] nArray = new int[number][number];
+		for(int i = 0; i < number; i++) {
+			for(int j = 0; j < number; j++) {
+				nArray[i][j] = j + i + 1;
+			}
+		}
+
+		for(int[] row : nArray) {
+			for(int col : row) {
+				System.out.print(col + "\t");
+			}
+			System.out.println();
+		}
+	}
+
+	public void printSquare() {
+		Scanner scanner = new Scanner(System.in);
+		//int number = 3;	//임시
+		System.out.print("숫자 입력 (사각형): ");
+		int number = scanner.nextInt();
+		char[][] square = new char[number][number];
+		for(int i = 0; i < number; i++) {
+			for(int j = 0; j < number; j++) {
+				if(j == 0) {
+					if(i == 0) {
+						square[i][j] = '┌';
+					} else if(i == number - 1) {
+						square[i][j] = '└';
+					} else {
+						square[i][j] = '│';
+					}
+				} else if(j == number - 1) {
+					if(i == 0) {
+						square[i][j] = '┐';
+					} else if(i == number - 1) {
+						square[i][j] = '┘';
+					} else {
+						square[i][j] = '│';
+					}
+				} else {
+					if(i == 0 || i == number - 1) {
+						square[i][j] = '─';
+					} else {
+						square[i][j] = ' ';
+					}
+				}
+			}
+		}
+
+		for(char[] row : square) {
+			for(char col : row) {
+				System.out.print(col);
+			}
+			System.out.println();
+		}
+	}
+
+	public void printDiamond() {
+		Scanner scanner = new Scanner(System.in);
+		//int number = 5;
+		System.out.print("숫자 입력 (다이아몬드): ");
+		int number = scanner.nextInt();
+		char[][] chDiamond = new char[number][number];
+		int center = number / 2;
+		for(int i = 0; i < number; i++) {
+			for(int j = 0; j < number; j++) {
+				chDiamond[i][j] = ((Math.abs(i - center) + Math.abs(j - center)) <= center) ? '*' : ' ';
+			}
+		}
+
+		for(char[] row : chDiamond) {
+			for(char col : row) {
+				System.out.print(col);
+			}
+			System.out.println();
+		}
+	}
+
 	public static void main(String[] args) {
 		System.out.println();
 
@@ -177,6 +286,13 @@ public class Report0121 {
 		report.exercise1();
 		report.exercise2();
 		report.exercise3();
+
+		System.out.println();
+
+		report.arrayDoubleIntString();
+		report.slashNumber();
+		report.printSquare();
+		report.printDiamond();
 
 		System.out.println();
 	}
