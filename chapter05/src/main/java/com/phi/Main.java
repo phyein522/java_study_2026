@@ -24,5 +24,17 @@ public class Main {
 		ch5.arrayLengthExample();
 		ch5.multidimensionalArrayByValueListExample();
 		ch5.multidimensionalArrayByNewExample();
+
+		ch5.arrayReferenceObjectExample();
+		ch5.arrayCopyByForExample();
+		ch5.arrayCopyExample();
+		ch5.advancedForExample();
+		ch5.mainStringArrayArgument(new String[] {});
+		ch5.mainStringArrayArgument(new String[] {"10", "20"});
+		ch5.weekExample();
+
+		ch5.exercise07();
+		ch5.exercise08();
+		ch5.exercise09();
 	}
 }
