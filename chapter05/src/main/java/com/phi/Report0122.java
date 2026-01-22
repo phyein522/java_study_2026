@@ -76,6 +76,7 @@ public class Report0122 {
 		}
 		System.out.println("max: " + hexahedronArray[max[0]][max[1]][max[2]]);
 		System.out.println("min: " + hexahedronArray[min[0]][min[1]][min[2]]);
+		//TODO: 등장 횟수 출력
 	}
 
 	public static void main(String[] args) {
