@@ -21,6 +21,15 @@ public class Report0121 {
 			System.out.print((i != 0 ? ", " : "") + boolArray[i]);
 		}
 		System.out.println();
+
+		/*
+		boolean[] boolArray = new boolean[10];
+		for(int i = 0; i < boolArray.length; i++) {
+			boolArray[i] = (i % 2 == 0);
+			System.out.print((i != 0 ? ", " : "") + boolArray[i]);
+		}
+		System.out.println();
+		*/
 	}
 
 	public void countZeroAndOne() {
@@ -235,31 +244,54 @@ public class Report0121 {
 		}
 		//int number = scanner.nextInt();
 		char[][] square = new char[number][number];
-		for(int i = 0; i < number; i++) {
-			for(int j = 0; j < number; j++) {
-				if(j == 0) {
-					if(i == 0) {
-						square[i][j] = '┌';
-					} else if(i == number - 1) {
-						square[i][j] = '└';
+		for(int row = 0; row < number; row++) {
+			for(int col = 0; col < number; col++) {
+				if(col == 0) {
+					if(row == 0) {
+						square[row][col] = '┌';
+					} else if(row == number - 1) {
+						square[row][col] = '└';
 					} else {
-						square[i][j] = '│';
+						square[row][col] = '│';
 					}
-				} else if(j == number - 1) {
-					if(i == 0) {
-						square[i][j] = '┐';
-					} else if(i == number - 1) {
-						square[i][j] = '┘';
+				} else if(col == number - 1) {
+					if(row == 0) {
+						square[row][col] = '┐';
+					} else if(row == number - 1) {
+						square[row][col] = '┘';
 					} else {
-						square[i][j] = '│';
+						square[row][col] = '│';
 					}
 				} else {
-					if(i == 0 || i == number - 1) {
-						square[i][j] = '─';
+					if(row == 0 || row == number - 1) {
+						square[row][col] = '─';
 					} else {
-						square[i][j] = ' ';
+						square[row][col] = ' ';
 					}
 				}
+
+				/*
+				boolean top = (row == 0);
+				boolean bottom = (row == number - 1);
+				boolean left = (col == 0);
+				boolean right = (col == number - 1);
+
+				if (top && left) {
+					square[row][col] = '┌';
+				} else if (top && right) {
+					square[row][col] = '┐';
+				} else if (bottom && left) {
+					square[row][col] = '└';
+				} else if (bottom && right) {
+					square[row][col] = '┘';
+				} else if (top || bottom) {
+					square[row][col] = '─';
+				} else if (left || right) {
+					square[row][col] = '│';
+				} else {
+					square[row][col] = ' ';
+				}
+				*/
 			}
 		}
 
