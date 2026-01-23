@@ -63,7 +63,7 @@ public class Report0122 {
 						max[2] = col;
 					}
 					if(hexahedronArray[side][row][col] < 0) {
-						int index = hexahedronArray[side][row][col] * -100;
+						int index = hexahedronArray[side][row][col] * -1 + 100;
 						count[index]++;
 					} else {
 						count[hexahedronArray[side][row][col]]++;
@@ -77,6 +77,17 @@ public class Report0122 {
 		System.out.println("max: " + hexahedronArray[max[0]][max[1]][max[2]]);
 		System.out.println("min: " + hexahedronArray[min[0]][min[1]][min[2]]);
 		//TODO: 등장 횟수 출력
+		for(int i = 0; i < count.length; i++) {
+			if(i % 10 == 0) {
+				System.out.println();
+			}
+			System.out.print(i % 10 == 0 ? "" : " \t");
+			if(i < 101) {
+				System.out.printf("%-3d: %-3d", i, count[i]);
+			} else {
+				System.out.printf("%-3d: %-3d", ((i - 100) * -1), count[i]);
+			}
+		}
 	}
 
 	public static void main(String[] args) {
