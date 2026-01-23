@@ -74,8 +74,8 @@ public class Report0122 {
 			}
 			System.out.println();
 		}
-		System.out.println("max: " + hexahedronArray[max[0]][max[1]][max[2]]);
-		System.out.println("min: " + hexahedronArray[min[0]][min[1]][min[2]]);
+		System.out.printf("max: hexahedronArray[%d][%d][%d] = %d\n", max[0], max[1], max[2], hexahedronArray[max[0]][max[1]][max[2]]);
+		System.out.printf("min: hexahedronArray[%d][%d][%d] = %d\n", min[0], min[1], min[2], hexahedronArray[min[0]][min[1]][min[2]]);
 		int line = 0;
 		for(int i = 0; i < count.length; i++) {
 			/*
