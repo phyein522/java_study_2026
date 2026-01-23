@@ -48,7 +48,7 @@ public class Report0122 {
 			for(int row = 0; row < hexahedronArray[side].length; row++) {
 				for(int col = 0; col < hexahedronArray[side][row].length; col++) {
 					if(side + row + col == 0) {
-						System.out.print(hexahedronArray[side][row][col]);
+						System.out.printf("%-4d", hexahedronArray[side][row][col]);
 						continue;
 					}
 					hexahedronArray[side][row][col] = (int)(Math.random() * 201) - 100;
@@ -68,7 +68,7 @@ public class Report0122 {
 					} else {
 						count[hexahedronArray[side][row][col]]++;
 					}
-					System.out.print((col == 0 ? "" : ", ") + hexahedronArray[side][row][col]);
+					System.out.printf((col == 0 ? "" : " \t") + "%-4d", hexahedronArray[side][row][col]);
 				}
 				System.out.println();
 			}
@@ -98,9 +98,9 @@ public class Report0122 {
 				}
 				line++;
 				if(i < 101) {
-					System.out.printf("%-3d: %-3d", i, count[i]);
+					System.out.printf("%-4d: %-4d", i, count[i]);
 				} else {
-					System.out.printf("%-3d: %-3d", ((i - 100) * -1), count[i]);
+					System.out.printf("%-4d: %-4d", ((i - 100) * -1), count[i]);
 				}
 			}
 		}
