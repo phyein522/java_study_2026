@@ -1,7 +1,5 @@
 package com.phi.exercise;
 
-import com.phi.package1.A;
-
 public class Main {
 	public static void main(String[] args) {
 		Member user1 = new Member("홍길동", "hong");
