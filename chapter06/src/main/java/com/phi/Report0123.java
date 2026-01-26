@@ -121,7 +121,7 @@ class GameCharacter {
 	private int luxc;
 
 	GameCharacter(String name, String job, String gender, String birth, int hp, int mp, int strc, int intc, int dexc, int luxc) {
-		this.name = name.length() < 1 ? "unknown" : name.length() > 10 ? name.substring(0, 10) : name;
+		this.name = name.length() < 1 || name == null ? "unknown" : name.length() > 10 ? name.substring(0, 10) : name;
 		this.job = switch(job) {
 			case "warrior", "Warrior", "WARRIOR" -> "WARRIOR";
 			case "magician", "Magician", "MAGICIAN" -> "MAGICIAN";
