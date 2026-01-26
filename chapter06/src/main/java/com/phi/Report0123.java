@@ -1,5 +1,9 @@
 package com.phi;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
+
 public class Report0123 {
 	public static void main(String[] args) {
 		System.out.println();
@@ -107,7 +111,8 @@ class GameCharacter {
 	private String name;
 	private String job;
 	private String gender;
-	private String birth;
+//	private String birth;
+	private LocalDate birth;
 	private int hp;
 	private int mp;
 	private int strc;
@@ -116,16 +121,29 @@ class GameCharacter {
 	private int luxc;
 
 	GameCharacter(String name, String job, String gender, String birth, int hp, int mp, int strc, int intc, int dexc, int luxc) {
-		this.name = name;
-		this.job = job;
-		this.gender = gender;
-		this.birth = birth;
-		this.strc = strc;
-		this.intc = intc;
-		this.dexc = dexc;
-		this.luxc = luxc;
-		this.hp = hp;
-		this.mp = mp;
+		this.name = name.length() < 1 ? "unknown" : name.length() > 10 ? name.substring(0, 10) : name;
+		this.job = switch(job) {
+			case "warrior", "Warrior", "WARRIOR" -> "WARRIOR";
+			case "magician", "Magician", "MAGICIAN" -> "MAGICIAN";
+			default -> "unknown";
+		};
+		this.gender = switch(gender){
+			case "man", "male", "Man", "MAN", "Male", "MALE" -> "MAN";
+			case "woman", "female", "Woman", "WOMAN", "Female", "FEMALE" -> "WOMAN";
+			default -> "unknown";
+		};
+//		this.birth = birth;
+		try {
+			this.birth = LocalDate.parse(birth);
+		} catch(DateTimeParseException e) {
+			this.birth = LocalDate.now(ZoneId.of("Asia/Seoul"));
+		}
+		this.hp = hp < 0 ? 0 : hp;
+		this.mp = mp < 0 ? 0 : mp;
+		this.strc = strc < 1 ? 1 : strc;
+		this.intc = intc < 1 ? 1 : intc;
+		this.dexc = dexc < 1 ? 1 : dexc;
+		this.luxc = luxc < 1 ? 1 : luxc;
 	}
 
 	String getName() {
@@ -150,7 +168,7 @@ class GameCharacter {
 		return this.gender;
 	}
 	String getBirth() {
-		return this.birth;
+		return this.birth.toString();
 	}
 	int getDexc() {
 		return this.dexc;
