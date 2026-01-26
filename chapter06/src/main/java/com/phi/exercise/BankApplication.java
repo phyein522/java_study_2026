@@ -62,9 +62,6 @@ public class BankApplication {
 		}
 		try {
 			for(Account account : accounts) {
-				if(account == null) {
-					return;
-				}
 				System.out.println(account.getNumber() + " \t" + account.getName() + " \t" + account.getBalance());
 			}
 		} catch(Exception e) { }
