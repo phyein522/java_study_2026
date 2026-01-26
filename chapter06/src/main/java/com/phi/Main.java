@@ -15,5 +15,15 @@ public class Main {
 		ch6.computerExample();
 		ch6.carExample6();
 		ch6.calculatorExample2();
+
+		ch6.carExample7();
+		ch6.calculatorExample3();
+		ch6.televisionExample();
+		ch6.car8();
+		ch6.koreanExample3();
+		ch6.earthExample();
+		ch6.car9();
+		ch6.carExample10();
+		ch6.singletonExample();
 	}
 }

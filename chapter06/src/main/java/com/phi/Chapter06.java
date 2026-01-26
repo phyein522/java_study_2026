@@ -180,154 +180,94 @@ public class Chapter06 {
 		System.out.println("myCalc.areaRectangle(10): " + result1);
 		System.out.println("myCalc.areaRectangle(10, 20): " + result2);
 	}
-}
 
-class Car1 {
-	String model;
-	boolean start;
-	int speed;
-}
+	public void carExample7() {
+		System.out.println("\n\nCarExample (7)");
 
-class Car2 {
-	String company = "현대자동차";
-	String model = "그랜저";
-	String color = "검정";
-	int maxSpeed = 350;
-	int speed;
-}
+		Car7 myCar = new Car7("포르쉐");
+		Car7 yourCar = new Car7("벤츠");
 
-class Car3 {
-	String model;
-	String color;
-	int maxSpeed;
-
-	Car3(String model, String color, int maxSpeed) {
-		this.model = model;
-		this.color = color;
-		this.maxSpeed = maxSpeed;
+		myCar.run();
+		yourCar.run();
 	}
-}
+	public void calculatorExample3() {
+		System.out.println("\n\nCalculatorExample (3)");
 
-class Korean1 {
-	String nation = "대한민국";
-	String name;
-	String ssn;
+		double result1 = 10 * 10 * Calculator3.pi;
+		int result2 = Calculator3.plus(10, 5);
+		int result3 = Calculator3.minus(10, 5);
 
-	public Korean1(String n, String s) {
-		name = n;
-		ssn = s;
+		System.out.println("10 * 10 * Calculator.pi: " + result1);
+		System.out.println("Calculator.plus(10, 5): " + result2);
+		System.out.println("Calculator.minus(10, 5): " + result3);
 	}
-}
+	public void televisionExample() {
+		System.out.println("\n\nTelevisionExample");
 
-class Korean2 {
-	String nation = "대한민국";
-	String name;
-	String ssn;
-
-	public Korean2(String name, String ssn) {
-		this.name = name;
-		this.ssn = ssn;
+		System.out.println(Television.info);
 	}
-}
+	public void car8() {
+		System.out.println("\n\nCar (8)");
 
-class Car4 {
-	String company = "현대자동차";
-	String model;
-	String color;
-	int maxSpeed;
+		Car8.simulate();
 
-	Car4() {
-
-	} Car4(String model) {
-		this.model = model;
-	} Car4(String model, String color) {
-		this.model = model;
-		this.color = color;
-	} Car4(String model, String color, int maxSpeed) {
-		this.model = model;
-		this.color = color;
-		this.maxSpeed = maxSpeed;
+		Car8 myCar = new Car8();
+		myCar.speed = 60;
+		myCar.run();
 	}
-}
+	public void koreanExample3() {
+		System.out.println("\n\nKoreanExample (3)");
 
-class Car5 {
-	String company = "현대자동차";
-	String model;
-	String color;
-	int maxSpeed;
+		Korean3 k1 = new Korean3("123456-1234567", "김자바");
 
-	Car5(String model) {
-		this(model, "은색", 250);
-	} Car5(String model, String color) {
-		this(model, color, 250);
-	} Car5(String model, String color, int maxSpeed) {
-		this.model = model;
-		this.color = color;
-		this.maxSpeed = maxSpeed;
-	}
-}
+		System.out.println("k1.nation: " + k1.nation);
+		System.out.println("k1.ssn: " + k1.ssn);
+		System.out.println("k1.name: " + k1.name);
 
-class Calculator1 {
-	void powerOn() {
-		System.out.println("Calculator 전원을 켭니다.");
+		k1.name = "김자바";
 	}
-	void powerOff() {
-		System.out.println("Calculator 전원을 끕니다.");
-	}
-	int plus(int x, int y) {
-		int result = x + y;
-		return result;
-	}
-	double divide(int x, int y) {
-		double result = (double)x / y;
-		return result;
-	}
-}
+	public void earthExample() {
+		System.out.println("\n\nEarthExample");
 
-class Computer {
-	int sum(int ...values) {
-		int sum = 0;
-		for(int i = 0; i < values.length; i++) {
-			sum += values[i];
+		System.out.println("지구의 반지름: " + Earth.EARTH_RADIUS + "km");
+		System.out.println("지구의 표면적: " + Earth.EARTH_SURFACE_AREA + "km^2");
+	}
+	public void car9() {
+		System.out.println("\n\nCar (9)");
+
+		com.phi.hyundai.Car9 car9 = new com.phi.hyundai.Car9();
+	}
+	public void carExample10() {
+		System.out.println("\n\nCarExample (10)");
+
+		Car10 myCar = new Car10();
+
+		myCar.setSpeed(-50);
+		System.out.println("현재 속도: " + myCar.getSpeed());
+
+		myCar.setSpeed(60);
+		System.out.println("현재 속도: " + myCar.getSpeed());
+
+		System.out.println("isStop(): " + myCar.isStop());
+		if(!myCar.isStop()) {
+			myCar.setStop(true);
 		}
-		return sum;
+		System.out.println("현재 속도: " + myCar.getSpeed());
+		System.out.println("isStop(): " + myCar.isStop());
 	}
-}
+	public void singletonExample() {
+		System.out.println("\n\nSingletonExapmle");
 
-class Car6 {
-	int gas;
+		Singleton obj1 = Singleton.getInstance();
+		Singleton obj2 = Singleton.getInstance();
 
-	void setGas(int gas) {
-		this.gas = gas;
-	}
-
-	boolean isLeftGas() {
-		if(gas == 0) {
-			System.out.println("gas가 없습니다.");
-			return false;
+		if(obj1 == obj2) {
+			System.out.println("같은 Singleton 객체입니다.");
+		} else {
+			System.out.println("다른 Singleton 객체입니다.");
 		}
-		System.out.println("gas가 있습니다.");
-		return true;
-	}
 
-	void run() {
-		while(true) {
-			if(gas > 0) {
-				System.out.println("달립니다. (gas 잔량: " + gas + ")");
-				gas--;
-			} else {
-				System.out.println("멈춤니다. (gas 잔량: " + gas + ")");
-				return;
-			}
-		}
-	}
-}
-
-class Calculator2 {
-	double areaRectangle(double width) {
-		return width * width;
-	}
-	double areaRectangle(double width, double height) {
-		return width * height;
+		System.out.println("obj1: " + obj1);
+		System.out.println("obj2: " + obj2);
 	}
 }
