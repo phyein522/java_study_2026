@@ -14,7 +14,9 @@ public class Account {
 	private String number;
 	private String name;
 
+	public Account() {}
+
 	public void setBalance(int balance) {
-		this.balance = balance > MIN_BALANCE ? (balance < MAX_BALANCE ? balance : this.balance) : this.balance;
+		this.balance = balance >= MIN_BALANCE ? (balance <= MAX_BALANCE ? balance : this.balance) : this.balance;
 	}
 }

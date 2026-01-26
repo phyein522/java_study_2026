@@ -45,5 +45,6 @@ public class Main {
 		System.out.println("현재 잔고: " + account.getBalance());
 
 		BankApplication.start();
+//		BankApp.start();
 	}
 }
