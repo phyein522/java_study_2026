@@ -14,24 +14,25 @@ public class BankApp {
 		System.out.print("선택>  ");
 	}
 
-	public static boolean isOn() {
+	private static boolean isOn() {
 		return on;
 	}
-	public static void setOn(boolean on) {
+	private static void setOn(boolean on) {
 		BankApp.on = on;
 	}
 
 	private static void select() {
 		Scanner scanner = new Scanner(System.in);
-		String select = scanner.nextLine();
-		switch(select) {
-			case "1": createAccount(); break;
-			case "2": accountList(); break;
-			case "3": deposit(); break;
-			case "4": withdrawal(); break;
-			case "5": endBankApplication(); break;
-			default: break;
-		}
+		try {
+			switch(scanner.nextLine()) {
+				case "1": createAccount(); break;
+				case "2": accountList(); break;
+				case "3": deposit(); break;
+				case "4": withdrawal(); break;
+				case "5": endBankApplication(); break;
+				default: break;
+			}
+		} catch(Exception e) { }
 	}
 
 	private static void createAccount() {
@@ -77,26 +78,10 @@ public class BankApp {
 		System.out.println("\n----------");
 		System.out.println("예금");
 		System.out.println("----------");
-		if(accounts.isEmpty()) {
-			System.out.println("계좌목록 없음");
-			return;
-		}
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("계좌번호:  ");
-		String number = scanner.nextLine();
-		int index = -1;
-		try {
-			for (int i = 0; i < accounts.size(); i++) {
-				if (number.equals(accounts.get(i).getNumber())) {
-					index = i;
-					break;
-				}
-			}
-		} catch(Exception e) {
-			return;
-		}
+		int index = getIndex();
 		if(index == -1) {
-			System.out.println("해당 계좌번호를 찾을 수 없습니다.");
+//			System.out.println("해당 계좌번호를 찾을 수 없습니다.");
 			return;
 		}
 		System.out.print("예금액:  ");
@@ -108,28 +93,12 @@ public class BankApp {
 		System.out.println("\n----------");
 		System.out.println("출금");
 		System.out.println("----------");
-		if(accounts.isEmpty()) {
-			System.out.println("계좌목록 없음");
+		int index = getIndex();
+		if(index == -1) {
+//			System.out.println("해당 계좌번호를 찾을 수 없습니다.");
 			return;
 		}
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("계좌번호:  ");
-		String number = scanner.nextLine();
-		int index = -1;
-		try {
-			for (int i = 0; i < accounts.size(); i++) {
-				if (number.equals(accounts.get(i).getNumber())) {
-					index = i;
-					break;
-				}
-			}
-		} catch(Exception e) {
-			return;
-		}
-		if(index == -1) {
-			System.out.println("해당 계좌번호를 찾을 수 없습니다.");
-			return;
-		}
 		System.out.print("출금액:  ");
 		try {
 			accounts.get(index).setBalance(accounts.get(index).getBalance() - Integer.parseInt(scanner.nextLine()));
@@ -138,6 +107,33 @@ public class BankApp {
 	private static void endBankApplication() {
 		System.out.println("\n프로그램 종료\n");
 		setOn(false);
+	}
+
+	private static int getIndex() {
+		if(accounts.isEmpty()) {
+			System.out.println("계좌목록 없음");
+			return -1;
+		}
+		Scanner scanner = new Scanner(System.in);
+		int index = -1;
+		System.out.print("계좌번호:  ");
+		try {
+			String number = scanner.nextLine();
+			for (int i = 0; i < accounts.size(); i++) {
+				if (number.equals(accounts.get(i).getNumber())) {
+					index = i;
+					return index;
+//					break;
+				}
+			}
+		} catch(Exception e) {
+			return -1;
+		}
+		if(index == -1) {
+			System.out.println("해당 계좌번호를 찾을 수 없습니다.");
+			return index;
+		}
+		return -1;
 	}
 
 	public static void start() {
