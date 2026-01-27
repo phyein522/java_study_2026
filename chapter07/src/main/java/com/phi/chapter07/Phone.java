@@ -37,8 +37,8 @@ public class Phone {
 	@Override
 	public String toString() {
 		return "Phone{" +
-				"model='" + model + '\'' +
-				", color='" + color + '\'' +
+				"model='" + this.getModel() + '\'' +
+				", color='" + this.getColor() + '\'' +
 				'}';
 	}
 }

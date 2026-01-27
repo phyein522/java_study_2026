@@ -23,9 +23,9 @@ public class SmartPhone extends Phone {
 	@Override
 	public String toString() {
 		return "SmartPhone{" +
-				"model='" + model + '\'' +
-				", color='" + color + '\'' +
-				", wifi=" + wifi +
+				"model='" + this.getModel() + '\'' +
+				", color='" + this.getColor() + '\'' +
+				", wifi=" + this.getWifi() +
 				'}';
 	}
 }
