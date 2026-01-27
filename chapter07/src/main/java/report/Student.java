@@ -24,7 +24,50 @@ public class Student {
 	private Lecture[] lectures = new Lecture[0];
 
 	public Student() {
-		newStudent();
+		Scanner scanner = new Scanner(System.in);
+
+		String name;
+		do {
+			System.out.print("\n이름 (1~100자): ");
+			name = scanner.nextLine();
+		} while(!isValid(name, "name"));
+		this.setName(name);
+
+		String major;
+		do {
+			System.out.print("\n학과 (1~100자): ");
+			major = scanner.nextLine();
+		} while(!isValid(major, "major"));
+		this.setMajor(major);
+
+		String number;
+		do {
+			System.out.print("\n학번 (10자리 숫자): ");
+			number = scanner.nextLine();
+		} while(!isValid(number, "number"));
+		this.setNumber(Integer.parseInt(number));
+
+		String birth;
+		do {
+			System.out.print("\n생년월일 (yyyy-MM-dd) (선택): ");
+			birth = scanner.nextLine();
+		} while(!birth.isBlank() && !isValid(birth, "birth"));
+		this.setBirth(birth.isBlank() ? null : LocalDate.parse(birth, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+		String phone;
+		do {
+			System.out.print("\n전화번호 (010-0000-0000) (선택): ");
+			phone = scanner.nextLine();
+		} while(!phone.isBlank() && !isValid(phone, "phone"));
+		this.setPhone(phone.isBlank() ? null : phone);
+
+		String email;
+		do {
+			System.out.print("\n이메일 (선택): ");
+			email = scanner.nextLine();
+		} while(!email.isBlank() && !isValid(email, "email"));
+		this.setEmail(email.isBlank() ? null : email);
+
 		System.out.println(this.toString());
 	}
 
@@ -47,76 +90,40 @@ public class Student {
 	private void setEmail(String email) { this.email = email; }
 	private void setLectrues(Lecture[] lectures) { this.lectures = lectures; }
 
-	private void newStudent() {
-		Scanner scanner = new Scanner(System.in);
-
+//	public static void newStudent() {
+//		Scanner scanner = new Scanner(System.in);
+//
 //		System.out.print("\n이름 (1~100자): ");
 //		String name = scanner.nextLine();
 //		if(!isValid(name, "name")) { return null; }
-		String name;
-		do {
-			System.out.print("\n이름 (1~100자): ");
-			name = scanner.nextLine();
-		} while(!isValid(name, "name"));
-		this.setName(name);
-
+//
 //		System.out.print("\n학과 (1~100자): ");
 //		String major = scanner.nextLine();
 //		if(!isValid(major, "major")) { return null; }
-		String major;
-		do {
-			System.out.print("\n학과 (1~100자): ");
-			major = scanner.nextLine();
-		} while(!isValid(major, "major"));
-		this.setMajor(major);
-
+//
 //		System.out.print("\n학번 (10자리 숫자): ");
 //		String numberString = scanner.nextLine();
 //		if(!isValid(numberString, "number")) { return null; }
 //		int number = Integer.parseInt(numberString);
-		String number;
-		do {
-			System.out.print("\n학번 (10자리 숫자): ");
-			number = scanner.nextLine();
-		} while(!isValid(number, "number"));
-		this.setNumber(Integer.parseInt(number));
-
+//
 //		System.out.print("\n생년월일 (yyyy-MM-dd) (선택): ");
 //		String birthString = scanner.nextLine();
 //		if(!birthString.isBlank() && !isValid(birthString, "birth")) { return null; }
 //		LocalDate birth = birthString.isBlank() ? null : LocalDate.parse(birthString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String birth;
-		do {
-			System.out.print("\n생년월일 (yyyy-MM-dd) (선택): ");
-			birth = scanner.nextLine();
-		} while(!birth.isBlank() && !isValid(birth, "birth"));
-		this.setBirth(birth.isBlank() ? null : LocalDate.parse(birth, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-
+//
 //		System.out.print("\n전화번호 (010-0000-0000) (선택): ");
 //		String phone = scanner.nextLine();
 //		if(!phone.isBlank() && !isValid(phone, "phone")) { return null; }
 //		phone = phone.isBlank() ? null : phone;
-		String phone;
-		do {
-			System.out.print("\n전화번호 (010-0000-0000) (선택): ");
-			phone = scanner.nextLine();
-		} while(!phone.isBlank() && !isValid(phone, "phone"));
-		this.setPhone(phone.isBlank() ? null : phone);
-
+//
 //		System.out.print("\n이메일 (선택): ");
 //		String email = scanner.nextLine();
 //		if(!email.isBlank() && !isValid(email, "email")) { return null; }
 //		phone = email.isBlank() ? null : email;
-		String email;
-		do {
-			System.out.print("\n이메일 (선택): ");
-			email = scanner.nextLine();
-		} while(!email.isBlank() && !isValid(email, "email"));
-		this.setEmail(email.isBlank() ? null : email);
-
+//
 //		Student student = new Student(name, major, number, birth, phone, email);
 //		return student;
-	}
+//	}
 
 	private static boolean isValid(String input, String check) {
 		switch(check) {
