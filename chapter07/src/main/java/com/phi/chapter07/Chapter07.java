@@ -1,5 +1,8 @@
 package com.phi.chapter07;
 
+import com.phi.chapter07.package1.*;
+import com.phi.chapter07.package2.*;
+
 public class Chapter07 {
 	public void smartPhoneExample() {
 		System.out.println("\n\nSmartPhoneExample");
@@ -34,5 +37,60 @@ public class Chapter07 {
 		System.out.println("색상: " + yourPhone.getColor());
 		System.out.println("와이파이 상태: " + yourPhone.getWifi());
 		System.out.println(yourPhone.toString());
+	}
+	public void computerExample() {
+		System.out.println("\n\nComputerExample");
+
+		int r = 10;
+
+		Calculator calculator = new Calculator();
+		System.out.println("원 면적: " + calculator.areaCircle(r) + "\n");
+
+		Computer computer = new Computer();
+		System.out.println("원 면적: " + computer.areaCircle(r));
+	}
+	public void supersonicAirplaneExample() {
+		System.out.println("\n\nSupersonicAirplaneExample");
+
+		SupersonicAirplane sa = new SupersonicAirplane();
+		sa.takeOff();
+		sa.fly();
+		sa.setFlyMode(SupersonicAirplane.SUPERSONIC);
+		sa.fly();
+		sa.setFlyMode(SupersonicAirplane.NORMAL);
+		sa.fly();
+		sa.land();
+	}
+	public void promotionExample() {
+		System.out.println("\n\nPromotionExample");
+
+		InheritanceB b = new InheritanceB();
+		InheritanceC c = new InheritanceC();
+		InheritanceD d = new InheritanceD();
+		InheritanceE e = new InheritanceE();
+
+		InheritanceA a1 = b;
+		InheritanceA a2 = c;
+		InheritanceA a3 = d;
+		InheritanceA a4 = e;
+
+		InheritanceB b1 = d;
+		InheritanceC c1 = e;
+	}
+	public void childExample() {
+		System.out.println("\n\nChildExample");
+
+		Child child = new Child();
+		Parent parent = child;
+
+		parent.method1();
+		parent.method2();
+
+
+		parent.field1 = "data1";
+		child = (Child)parent;
+		child.field2 = "data2";
+		child.method3();
+		System.out.println("field1: " + child.field1 + ", field2: " + child.field2);
 	}
 }

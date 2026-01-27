@@ -5,5 +5,9 @@ public class Main {
 		Chapter07 ch7 = new Chapter07();
 
 		ch7.smartPhoneExample();
+		ch7.computerExample();
+		ch7.supersonicAirplaneExample();
+		ch7.promotionExample();
+		ch7.childExample();
 	}
 }
