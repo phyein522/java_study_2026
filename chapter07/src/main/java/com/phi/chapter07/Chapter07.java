@@ -25,12 +25,14 @@ public class Chapter07 {
 
 		System.out.println(myPhone.toString());
 
-		myPhone.setModel("아이폰");
-		myPhone.setColor("검정");
-		myPhone.setWifi(false);
-		System.out.println("모델: " + myPhone.getModel());
-		System.out.println("색상: " + myPhone.getColor());
-		System.out.println("와이파이 상태: " + myPhone.getWifi());
-		System.out.println(myPhone.toString());
+		SmartPhone yourPhone = new SmartPhone();
+		System.out.println(yourPhone.toString());
+		yourPhone.setModel("아이폰");
+		yourPhone.setColor("검정");
+		yourPhone.setWifi(true);
+		System.out.println("모델: " + yourPhone.getModel());
+		System.out.println("색상: " + yourPhone.getColor());
+		System.out.println("와이파이 상태: " + yourPhone.getWifi());
+		System.out.println(yourPhone.toString());
 	}
 }
