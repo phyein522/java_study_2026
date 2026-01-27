@@ -23,7 +23,53 @@ public class Lecture {
 	private final static int F = 0;
 
 	public Lecture() {
-		newLecture();
+		Scanner scanner = new Scanner(System.in);
+
+		String subject;
+		do {
+			System.out.print("\n과목명 (1~100자): ");
+			subject = scanner.nextLine();
+		} while(!isValid(subject, "subject"));
+		this.setSubject(subject);
+
+		String credit;
+		do {
+			System.out.print("\n학점: ");
+			credit = scanner.nextLine();
+		} while(!isValid(credit, "credit"));
+		this.setCredit(Integer.parseInt(credit));
+
+		String grade;
+		do {
+			System.out.print("\n성적 (A~F): ");
+			grade = scanner.nextLine();
+		} while(!isValid(grade, "grade"));
+		this.setGrade(switch(grade) {
+			case "A", "a" -> A;
+			case "B", "b" -> B;
+			case "C", "c" -> C;
+			case "D", "d" -> D;
+			case "E", "e" -> E;
+			default -> F;
+		});
+
+		String takeDate;
+		do {
+			System.out.print("\n수강일 (년도-학기, 예: 2000-3): ");
+			takeDate = scanner.nextLine();
+		} while(!isValid(takeDate, "takeDate"));
+		this.setTakeDate(takeDate);
+
+		String divide;
+		do {
+			System.out.print("\n구분 (전공(MAJOR)/교양(REFINEMENT): ");
+			divide = scanner.nextLine();
+		} while(!isValid(divide, "divide"));
+		this.setDivide(switch(divide) {
+			case "전공", "major", "Major", "MAJOR" -> "MAJOR";
+			default -> "REFINEMENT";
+		});
+
 		System.out.println(this.toString());
 	}
 
@@ -41,30 +87,18 @@ public class Lecture {
 	private void setTakeDate(String takeDate) { this.takeDate = takeDate; }
 	private void setDivide(String divide) { this.divide = divide; }
 
-	private void newLecture() {
-		Scanner scanner = new Scanner(System.in);
-
+//	public static void newLecture() {
+//		Scanner scanner = new Scanner(System.in);
+//
 //		System.out.print("\n과목명 (1~100자): ");
 //		String subject = scanner.nextLine();
 //		if(!isValid(subject, "subject")) { return null; }
-		String subject;
-		do {
-			System.out.print("\n과목명 (1~100자): ");
-			subject = scanner.nextLine();
-		} while(!isValid(subject, "subject"));
-		this.setSubject(subject);
-
+//
 //		System.out.print("\n학점: ");
 //		String creditString = scanner.nextLine();
 //		if(!isValid(creditString, "credit")) { return null; }
 //		int credit = Integer.parseInt(creditString);
-		String credit;
-		do {
-			System.out.print("\n학점: ");
-			credit = scanner.nextLine();
-		} while(!isValid(credit, "credit"));
-		this.setCredit(Integer.parseInt(credit));
-
+//
 //		System.out.print("\n성적 (A~F): ");
 //		String gradeString = scanner.nextLine();
 //		if(!isValid(gradeString, "grade")) { return null; }
@@ -76,46 +110,18 @@ public class Lecture {
 //			case "E", "e" -> E;
 //			default -> F;
 //		};
-		String grade;
-		do {
-			System.out.print("\n성적 (A~F): ");
-			grade = scanner.nextLine();
-		} while(!isValid(grade, "grade"));
-		this.setGrade(switch(grade) {
-			case "A", "a" -> A;
-			case "B", "b" -> B;
-			case "C", "c" -> C;
-			case "D", "d" -> D;
-			case "E", "e" -> E;
-			default -> F;
-		});
-
+//
 //		System.out.print("\n수강일 (년도-학기, 예: 2000-3): ");
 //		String takeDate = scanner.nextLine();
 //		if(!isValid(takeDate, "takeDate")) { return null; }
-		String takeDate;
-		do {
-			System.out.print("\n수강일 (년도-학기, 예: 2000-3): ");
-			takeDate = scanner.nextLine();
-		} while(!isValid(takeDate, "takeDate"));
-		this.setTakeDate(takeDate);
-
+//
 //		System.out.print("\n구분 (전공(major)/교양(refinement): ");
 //		String divide = scanner.nextLine();
 //		if(!isValid(divide, "divide")) { return null; }
-		String divide;
-		do {
-			System.out.print("\n구분 (전공(major)/교양(refinement): ");
-			divide = scanner.nextLine();
-		} while(!isValid(divide, "divide"));
-		this.setDivide(switch(divide) {
-			case "전공", "major", "Major", "MAJOR", "교양" -> "MAJOR";
-			default -> "REFINEMENT";
-		});
-
+//
 //		Lecture lecture = new Lecture(subject, credit, grade, takeDate, divide);
 //		return lecture;
-	}
+//	}
 
 	private static boolean isValid(String input, String check) {
 		switch(check) {
