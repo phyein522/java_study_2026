@@ -162,15 +162,24 @@ public class Student {
 	public void takeLecture() {
 		Lecture newLecture = new Lecture();
 		Lecture[] newLectures = new Lecture[this.getLectures().length + 1];
-		int i;
-		int totalCredit = 0;
-		for(i = 0; i < this.getLectures().length; i++) {
-			newLectures[i] = this.getLectures()[i];
-			totalCredit += newLectures[i].getCredit();
-		}
-		newLectures[i] = newLecture;
-		totalCredit += newLectures[i].getCredit();
+//		int i;
+//		int totalCredit = 0;
+//		for(i = 0; i < this.getLectures().length; i++) {
+//			newLectures[i] = this.getLectures()[i];
+//			totalCredit += newLectures[i].getCredit();
+//		}
+//		newLectures[i] = newLecture;
+//		totalCredit += newLectures[i].getCredit();
+//		this.setLectrues(newLectures);
+//		this.setTotalCredit(totalCredit);
+//		this.setAverageGrade((double)totalCredit/this.getLectures().length);
+		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);
+		newLectures[this.getLectures().length] = newLecture;
 		this.setLectrues(newLectures);
+		int totalCredit = 0;
+		for(Lecture lecture : this.getLectures()) {
+			totalCredit += lecture.getCredit();
+		}
 		this.setTotalCredit(totalCredit);
 		this.setAverageGrade((double)totalCredit/this.getLectures().length);
 		System.out.println(this.toString());
