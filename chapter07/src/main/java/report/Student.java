@@ -157,7 +157,7 @@ public class Student {
 				}
 				break;
 			case "email":
-				if(!input.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$")) {
+				if(!input.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
 					System.out.println("이메일을 이메일 형식으로 입력해주세요.");
 					return false;
 				}
