@@ -188,7 +188,7 @@ public class Student {
 			totalCredit += lecture.getCredit();
 		}
 		this.setTotalCredit(totalCredit);
-		this.setAverageGrade((double)totalCredit/this.getLectures().length);
+		this.setAverageGrade((double)this.getTotalCredit()/this.getLectures().length);
 		System.out.println(this.toString());
 	}
 }
