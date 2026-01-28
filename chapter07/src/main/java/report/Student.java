@@ -123,10 +123,9 @@ public class Student {
 	}
 
 	public void takeLecture() {
-		Lecture newLecture = new Lecture();
 		Lecture[] newLectures = new Lecture[this.getLectures().length + 1];
 		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);
-		newLectures[this.getLectures().length] = newLecture;
+		newLectures[this.getLectures().length] = new Lecture();
 		this.setLectures(newLectures);
 		int totalCredit = 0;
 		int averageGrade = 0;
