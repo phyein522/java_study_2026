@@ -128,13 +128,13 @@ public class Student {
 		newLectures[this.getLectures().length] = new Lecture();
 		this.setLectures(newLectures);
 		int totalCredit = 0;
-		int averageGrade = 0;
+		double averageGrade = 0;
 		for(Lecture lecture : this.getLectures()) {
 			totalCredit += lecture.getGrade() == Lecture.F ? 0 : lecture.getCredit();
 			averageGrade += lecture.getGrade();
 		}
 		this.setTotalCredit(totalCredit);
-		this.setAverageGrade((double)averageGrade/this.getLectures().length);
+		this.setAverageGrade(averageGrade/this.getLectures().length);
 		System.out.println(this.toString());
 	}
 }

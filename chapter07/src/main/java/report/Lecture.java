@@ -11,16 +11,19 @@ public class Lecture {
 	//lecture (과목) {과목명, 학점, 성적, 수강일(년도-학기), 구분 divide(전공 major/교양 refinement)}
 	private String subject;
 	private int credit;
-	private int grade;
+	private double grade;
 	private String takeDate;
 	private String divide;
 
-	public final static int A = 5;
-	public final static int B = 4;
-	public final static int C = 3;
-	public final static int D = 2;
-	public final static int E = 1;
-	public final static int F = 0;
+	public final static double A_PLUS = 4.5;
+	public final static double A = 4.0;
+	public final static double B_PLUS = 3.5;
+	public final static double B = 3.0;
+	public final static double C_PLUS = 2.5;
+	public final static double C = 2;
+	public final static double D_PLUS = 1.5;
+	public final static double D = 1.0;
+	public final static double F = 0.0;
 
 	public Lecture() {
 		Scanner scanner = new Scanner(System.in);
@@ -41,15 +44,18 @@ public class Lecture {
 
 		String grade;
 		do {
-			System.out.print("\n성적 (A~F): ");
+			System.out.print("\n성적 (F~A+): ");
 			grade = scanner.nextLine();
 		} while(!isValid(grade, "grade"));
 		this.setGrade(switch(grade) {
-			case "A", "a" -> A;
-			case "B", "b" -> B;
-			case "C", "c" -> C;
-			case "D", "d" -> D;
-			case "E", "e" -> E;
+			case "A+", "a+" -> A_PLUS;
+			case "A", "a", "A0", "a0" -> A;
+			case "B+", "b+" -> B_PLUS;
+			case "B", "b", "B0", "b0" -> B;
+			case "C+", "c+" -> C_PLUS;
+			case "C", "c", "C0", "c0" -> C;
+			case "D+", "d+" -> D_PLUS;
+			case "D", "d", "D0", "d0" -> D;
 			default -> F;
 		});
 
@@ -75,7 +81,7 @@ public class Lecture {
 
 	private void setSubject(String subject) { this.subject = subject; }
 	private void setCredit(int credit) { this.credit = credit; }
-	private void setGrade(int grade) { this.grade = grade; }
+	private void setGrade(double grade) { this.grade = grade; }
 	private void setTakeDate(String takeDate) { this.takeDate = takeDate; }
 	private void setDivide(String divide) { this.divide = divide; }
 
@@ -94,8 +100,8 @@ public class Lecture {
 				}
 				break;
 			case "grade":
-				if(!input.matches("[A-Fa-f]{1}")) {
-					System.out.println("성적을 A~F 범위로 입력하세요.");
+				if(!input.matches("^[A-DFa-df]([0+])?$")) {
+					System.out.println("성적을 F~A+ 범위로 입력하세요.");
 					return false;
 				}
 				break;
