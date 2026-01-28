@@ -13,15 +13,15 @@ import java.util.Scanner;
 public class Student {
 	//student {이름, 학번, 학과, 생년월일, 전화번호, 이메일, 총학점, 평균학점}
 	//takeLecture (수강)
-	private String name;
-	private String major;
-	private int number;
-	private LocalDate birth;
-	private String phone;
-	private String email;
-	private int totalCredit = 0;
-	private double averageGrade = 0;
-	private Lecture[] lectures = new Lecture[0];
+	private String name;	//이름
+	private String major;	//전공(학과)
+	private int number;	//학번
+	private LocalDate birth;	//생년월일
+	private String phone;	//전화번호 (선택)
+	private String email;	//이메일 (선택)
+	private int totalCredit = 0;	//총학점
+	private double averageGrade = 0;	//편균성적
+	private Lecture[] lectures = new Lecture[0];	//수강한 강의
 
 	public Student() {
 		Scanner scanner = new Scanner(System.in);
@@ -123,18 +123,18 @@ public class Student {
 	}
 
 	public void takeLecture() {
-		Lecture[] newLectures = new Lecture[this.getLectures().length + 1];
-		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);
-		newLectures[this.getLectures().length] = new Lecture();
-		this.setLectures(newLectures);
-		int totalCredit = 0;
-		double averageGrade = 0;
+		Lecture[] newLectures = new Lecture[this.getLectures().length + 1];	//기존 배열 크기 + 1의 크기를 가진 새 배열
+		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);	//기존 배열을 새 배열에 복사
+		newLectures[this.getLectures().length] = new Lecture();	//새 배열 맨 끝에 수강한 강의 추가
+		this.setLectures(newLectures);	//배열 교체
+		int totalCredit = 0;	//총학점
+		double averageGrade = 0;	//평균 성적
 		for(Lecture lecture : this.getLectures()) {
-			totalCredit += lecture.getGrade() == Lecture.F ? 0 : lecture.getCredit();
-			averageGrade += lecture.getGrade();
+			totalCredit += lecture.getGrade() == Lecture.F ? 0 : lecture.getCredit();	//F학점이라면 총학점에 0을, 아니라면 총학점에 해당 강의의 학점을 더함
+			averageGrade += lecture.getGrade();	//해당 강의의 성적을 더함
 		}
-		this.setTotalCredit(totalCredit);
-		this.setAverageGrade(averageGrade/this.getLectures().length);
+		this.setTotalCredit(totalCredit);	//총학점 재설정
+		this.setAverageGrade(averageGrade/this.getLectures().length);	//평균 성적 구해 재설정
 		System.out.println(this.toString());
 	}
 }

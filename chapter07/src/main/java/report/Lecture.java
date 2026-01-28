@@ -9,21 +9,21 @@ import java.util.Scanner;
 @ToString
 public class Lecture {
 	//lecture (과목) {과목명, 학점, 성적, 수강일(년도-학기), 구분 divide(전공 major/교양 refinement)}
-	private String subject;
-	private int credit;
-	private double grade;
-	private String takeDate;
-	private String divide;
+	private String subject;	//강의명
+	private int credit;	//학점
+	private double grade;	//성적
+	private String takeDate;	//수강일(년도-학기, 예: 2026-5)
+	private String divide;	//강의 구분(전공 MAJOR/교양 REFINEMENT)
 
-	public final static double A_PLUS = 4.5;
-	public final static double A = 4.0;
-	public final static double B_PLUS = 3.5;
-	public final static double B = 3.0;
-	public final static double C_PLUS = 2.5;
-	public final static double C = 2;
-	public final static double D_PLUS = 1.5;
-	public final static double D = 1.0;
-	public final static double F = 0.0;
+	public final static double A_PLUS = 4.5;	//A+, a+
+	public final static double A = 4.0;	//A0, a0, A, a
+	public final static double B_PLUS = 3.5;	//B+, b+
+	public final static double B = 3.0;	//B0, b0, B, b
+	public final static double C_PLUS = 2.5;	//C+, c+
+	public final static double C = 2;	//C0, c0, C, c
+	public final static double D_PLUS = 1.5;	//D+, d+
+	public final static double D = 1.0;	//D0, d0, D, d
+	public final static double F = 0.0;	//default
 
 	public Lecture() {
 		Scanner scanner = new Scanner(System.in);
