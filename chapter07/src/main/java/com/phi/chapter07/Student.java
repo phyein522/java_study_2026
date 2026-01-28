@@ -1,14 +1,16 @@
 package com.phi.chapter07;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Student extends Person {
 	public int studentNo;
 
 	public Student(String name, int studentNo) {
 		super(name);
-		this.studentNo = studentNo;
+		this.setStudentNo(studentNo);
 	}
 
 	public void study() {

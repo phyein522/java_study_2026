@@ -1,5 +1,10 @@
 package com.phi.chapter07;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public sealed class PersonSealed permits Employee, Manager {
 	public String name;
 
