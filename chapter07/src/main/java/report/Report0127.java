@@ -5,5 +5,6 @@ public class Report0127 {
 		Student student = new Student();
 		student.takeLecture();
 		student.takeLecture();
+		student.printLectures();
 	}
 }

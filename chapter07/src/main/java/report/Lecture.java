@@ -68,7 +68,7 @@ public class Lecture {
 
 		String divide;
 		do {
-			System.out.print("\n구분 (전공(MAJOR)/교양(REFINEMENT): ");
+			System.out.print("\n구분 (전공(MAJOR)/교양(REFINEMENT)): ");
 			divide = scanner.nextLine();
 		} while(!isValid(divide, "divide"));
 		this.setDivide(switch(divide) {

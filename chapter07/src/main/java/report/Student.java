@@ -6,6 +6,8 @@ import lombok.ToString;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 @Getter
@@ -135,6 +137,36 @@ public class Student {
 		}
 		this.setTotalCredit(totalCredit);	//총학점 재설정
 		this.setAverageGrade(averageGrade/this.getLectures().length);	//평균 성적 구해 재설정
+		this.sortLectures();
 		System.out.println(this.toString());
+	}
+
+	private void sortLectures() {
+		Arrays.sort(this.getLectures(), new Comparator<Lecture>() {
+			@Override
+			public int compare(Lecture l1, Lecture l2) {
+				//takeDate 비교
+				int result = l1.getTakeDate().compareTo(l2.getTakeDate());
+				if (result != 0) {
+					return result;
+				}
+
+				//divide 비교 (MAJOR 우선)
+				if (l1.getDivide().equals(l2.getDivide())) {	 //takeDate와 divide가 같음
+					return 0;
+				}
+				if (l1.getDivide().equals("MAJOR")) {	//takeDate가 같고, l1이 MAJOR
+					return -1;
+				}
+				return 1; //takeDate가 같고, l1이 REFINEMENT
+			}
+		});
+	}
+
+	public void printLectures() {
+		sortLectures();
+		for(Lecture lecture : this.getLectures()) {
+			System.out.println(lecture.toString());
+		}
 	}
 }
