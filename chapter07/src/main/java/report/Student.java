@@ -71,15 +71,6 @@ public class Student {
 		System.out.println(this.toString());
 	}
 
-//	private Student(String name, String major, int number, LocalDate birth, String phone, String email) {
-//		this.name = name;
-//		this.major = major;
-//		this.number = number;
-//		this.birth = birth;
-//		this.phone = phone;
-//		this.email = email;
-//	}
-
 	public void setTotalCredit(int totalCredit) { this.totalCredit = totalCredit; }
 	public void setAverageGrade(double averageGrade) { this.averageGrade = averageGrade; }
 	private void setName(String name) { this.name = name; }
@@ -89,41 +80,6 @@ public class Student {
 	private void setPhone(String phone) { this.phone = phone; }
 	private void setEmail(String email) { this.email = email; }
 	private void setLectures(Lecture[] lectures) { this.lectures = lectures; }
-
-//	public static void newStudent() {
-//		Scanner scanner = new Scanner(System.in);
-//
-//		System.out.print("\n이름 (1~100자): ");
-//		String name = scanner.nextLine();
-//		if(!isValid(name, "name")) { return null; }
-//
-//		System.out.print("\n학과 (1~100자): ");
-//		String major = scanner.nextLine();
-//		if(!isValid(major, "major")) { return null; }
-//
-//		System.out.print("\n학번 (10자리 숫자): ");
-//		String numberString = scanner.nextLine();
-//		if(!isValid(numberString, "number")) { return null; }
-//		int number = Integer.parseInt(numberString);
-//
-//		System.out.print("\n생년월일 (yyyy-MM-dd) (선택): ");
-//		String birthString = scanner.nextLine();
-//		if(!birthString.isBlank() && !isValid(birthString, "birth")) { return null; }
-//		LocalDate birth = birthString.isBlank() ? null : LocalDate.parse(birthString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//
-//		System.out.print("\n전화번호 (010-0000-0000) (선택): ");
-//		String phone = scanner.nextLine();
-//		if(!phone.isBlank() && !isValid(phone, "phone")) { return null; }
-//		phone = phone.isBlank() ? null : phone;
-//
-//		System.out.print("\n이메일 (선택): ");
-//		String email = scanner.nextLine();
-//		if(!email.isBlank() && !isValid(email, "email")) { return null; }
-//		phone = email.isBlank() ? null : email;
-//
-//		Student student = new Student(name, major, number, birth, phone, email);
-//		return student;
-//	}
 
 	private static boolean isValid(String input, String check) {
 		switch(check) {
@@ -169,26 +125,17 @@ public class Student {
 	public void takeLecture() {
 		Lecture newLecture = new Lecture();
 		Lecture[] newLectures = new Lecture[this.getLectures().length + 1];
-//		int i;
-//		int totalCredit = 0;
-//		for(i = 0; i < this.getLectures().length; i++) {
-//			newLectures[i] = this.getLectures()[i];
-//			totalCredit += newLectures[i].getCredit();
-//		}
-//		newLectures[i] = newLecture;
-//		totalCredit += newLectures[i].getCredit();
-//		this.setLectrues(newLectures);
-//		this.setTotalCredit(totalCredit);
-//		this.setAverageGrade((double)totalCredit/this.getLectures().length);
 		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);
 		newLectures[this.getLectures().length] = newLecture;
 		this.setLectures(newLectures);
 		int totalCredit = 0;
+		int averageGrade = 0;
 		for(Lecture lecture : this.getLectures()) {
-			totalCredit += lecture.getCredit();
+			totalCredit += lecture.getGrade() == Lecture.F ? 0 : lecture.getCredit();
+			averageGrade += lecture.getGrade();
 		}
 		this.setTotalCredit(totalCredit);
-		this.setAverageGrade((double)this.getTotalCredit()/this.getLectures().length);
+		this.setAverageGrade((double)averageGrade/this.getLectures().length);
 		System.out.println(this.toString());
 	}
 }

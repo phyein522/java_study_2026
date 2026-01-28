@@ -15,12 +15,12 @@ public class Lecture {
 	private String takeDate;
 	private String divide;
 
-	private final static int A = 5;
-	private final static int B = 4;
-	private final static int C = 3;
-	private final static int D = 2;
-	private final static int E = 1;
-	private final static int F = 0;
+	public final static int A = 5;
+	public final static int B = 4;
+	public final static int C = 3;
+	public final static int D = 2;
+	public final static int E = 1;
+	public final static int F = 0;
 
 	public Lecture() {
 		Scanner scanner = new Scanner(System.in);
@@ -73,55 +73,11 @@ public class Lecture {
 		System.out.println(this.toString());
 	}
 
-//	private Lecture(String subject, int credit, int grade, String takeDate, String divide) {
-//		this.subject = subject;
-//		this.credit = credit;
-//		this.grade = grade;
-//		this.takeDate = takeDate;
-//		this.divide = divide;
-//	}
-
 	private void setSubject(String subject) { this.subject = subject; }
 	private void setCredit(int credit) { this.credit = credit; }
 	private void setGrade(int grade) { this.grade = grade; }
 	private void setTakeDate(String takeDate) { this.takeDate = takeDate; }
 	private void setDivide(String divide) { this.divide = divide; }
-
-//	public static void newLecture() {
-//		Scanner scanner = new Scanner(System.in);
-//
-//		System.out.print("\n과목명 (1~100자): ");
-//		String subject = scanner.nextLine();
-//		if(!isValid(subject, "subject")) { return null; }
-//
-//		System.out.print("\n학점: ");
-//		String creditString = scanner.nextLine();
-//		if(!isValid(creditString, "credit")) { return null; }
-//		int credit = Integer.parseInt(creditString);
-//
-//		System.out.print("\n성적 (A~F): ");
-//		String gradeString = scanner.nextLine();
-//		if(!isValid(gradeString, "grade")) { return null; }
-//		int grade = switch(gradeString) {
-//			case "A", "a" -> A;
-//			case "B", "b" -> B;
-//			case "C", "c" -> C;
-//			case "D", "d" -> D;
-//			case "E", "e" -> E;
-//			default -> F;
-//		};
-//
-//		System.out.print("\n수강일 (년도-학기, 예: 2000-3): ");
-//		String takeDate = scanner.nextLine();
-//		if(!isValid(takeDate, "takeDate")) { return null; }
-//
-//		System.out.print("\n구분 (전공(major)/교양(refinement): ");
-//		String divide = scanner.nextLine();
-//		if(!isValid(divide, "divide")) { return null; }
-//
-//		Lecture lecture = new Lecture(subject, credit, grade, takeDate, divide);
-//		return lecture;
-//	}
 
 	private static boolean isValid(String input, String check) {
 		switch(check) {
