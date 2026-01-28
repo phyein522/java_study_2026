@@ -93,4 +93,84 @@ public class Chapter07 {
 		child.method3();
 		System.out.println("field1: " + child.field1 + ", field2: " + child.field2);
 	}
+
+	public void carExample() {
+		System.out.println("\n\nCarExample");
+
+		Car myCar = new Car();
+
+		myCar.setTire(new Tire());
+		myCar.run();
+
+		myCar.setTire(new HankookTire());
+		myCar.run();
+
+		myCar.setTire(new KumhoTire());
+		myCar.run();
+	}
+	public void driverExample() {
+		System.out.println("\n\nDriverExample");
+
+		Driver driver = new Driver();
+
+		Bus bus = new Bus();
+		driver.drive(bus);
+
+		Taxi taxi = new Taxi();
+		driver.drive(taxi);
+	}
+	public void instanceofExample() {
+		System.out.println("\n\nInstanceofExample");
+
+		Person p1 = new Person("홍길동");
+		personInfo(p1);
+		Person p2 = new Student("김길동", 10);
+		personInfo(p2);
+	}
+	public static void personInfo(Person person) {
+		System.out.println("name: " + person.getName());
+		person.walk();
+
+		if(person instanceof Student student) {
+			System.out.println("studentNo: " + student.getStudentNo());
+			student.study();
+		}
+	}
+	public void phoneExample() {
+		System.out.println("\n\nPhoneExample");
+
+		SmartPhoneAbstract smartphone = new SmartPhoneAbstract("홍길동");
+
+		smartphone.turnOn();
+		smartphone.internetSearch();
+		smartphone.turnOff();
+	}
+	public void abstractMethodExample() {
+		System.out.println("\n\nAbstractMethodExample");
+
+		Dog dog = new Dog();
+		dog.sound();
+
+		Cat cat = new Cat();
+		cat.sound();
+
+		animalSound(new Dog());
+		animalSound(new Cat());
+	}
+	public static void animalSound(Animal animal) {
+		animal.sound();
+	}
+	public void sealedExample() {
+		System.out.println("\n\nSealedExample");
+
+		PersonSealed p = new PersonSealed();
+		Employee e = new Employee();
+		Manager m = new Manager();
+		Director d = new Director();
+
+		p.work();
+		e.work();
+		m.work();
+		d.work();
+	}
 }
