@@ -22,7 +22,7 @@ public class Student {
 	private String phone;	//전화번호 (선택)
 	private String email;	//이메일 (선택)
 	private int totalCredit = 0;	//총학점
-	private double averageGrade = 0;	//편균성적
+	private double averageGrade = 0;	//평균성적
 	private Lecture[] lectures = new Lecture[0];	//수강한 강의
 
 	public Student() {
