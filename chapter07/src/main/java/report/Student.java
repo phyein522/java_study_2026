@@ -88,7 +88,7 @@ public class Student {
 	private void setBirth(LocalDate birth) { this.birth = birth; }
 	private void setPhone(String phone) { this.phone = phone; }
 	private void setEmail(String email) { this.email = email; }
-	private void setLectrues(Lecture[] lectures) { this.lectures = lectures; }
+	private void setLectures(Lecture[] lectures) { this.lectures = lectures; }
 
 //	public static void newStudent() {
 //		Scanner scanner = new Scanner(System.in);
@@ -182,7 +182,7 @@ public class Student {
 //		this.setAverageGrade((double)totalCredit/this.getLectures().length);
 		System.arraycopy(this.getLectures(), 0, newLectures, 0, this.getLectures().length);
 		newLectures[this.getLectures().length] = newLecture;
-		this.setLectrues(newLectures);
+		this.setLectures(newLectures);
 		int totalCredit = 0;
 		for(Lecture lecture : this.getLectures()) {
 			totalCredit += lecture.getCredit();
