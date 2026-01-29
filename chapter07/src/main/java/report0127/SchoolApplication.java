@@ -7,26 +7,27 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Getter
 public class SchoolApplication extends JFrame {
 	ArrayList<StudentForApp> students = new ArrayList<StudentForApp>(0);
-	int state = 0;
+	StudentForApp student;
 
 	public SchoolApplication() {
 		setTitle("SchoolApplication");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setLayout(null);
-
-		createMenu();
+		createMenu(0);
 
 		setSize(800, 450);
 		setVisible(true);
 	}
 
-	public void createMenu() {
+	void createMenu(int state) {
 		JMenuBar mb = new JMenuBar();
 		switch(state) {
 			case 0:
@@ -58,6 +59,18 @@ public class SchoolApplication extends JFrame {
 				});
 				mb.add(signupMenu);
 				mb.add(loginMenu);
+				break;
+			case 1:
+				JMenu lectureMenu = new JMenu("강의 관리");
+				JMenuItem lectureListMenuItem = new JMenuItem("강의 목록");
+				JMenuItem lectureAddMenuItem = new JMenuItem("강의 추가");
+				JMenuItem lectureRemoveMenuItem = new JMenuItem("강의 삭제");
+
+				JMenu myPageMenu = new JMenu("마이페이지");
+				JMenuItem logoutMenuItem = new JMenuItem("로그아웃");
+				JMenuItem signOutMenuItem = new JMenuItem("회원탈퇴");
+				JMenuItem informationMenuItem = new JMenuItem("회원 정보");	//회원 정보 수정 버튼 포함
+
 				break;
 		}
 		setJMenuBar(mb);
@@ -113,40 +126,51 @@ public class SchoolApplication extends JFrame {
 			signupBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(!StudentForApp.isValid(nameTf.getText(), "name")) {
+					String name = nameTf.getText();
+					if(!StudentForApp.isValid(name, "name")) {
 						JOptionPane.showMessageDialog(null, "이름을 1~100글자 범위로 입력하세요.", "name", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!StudentForApp.isValid(majorTf.getText(), "major")) {
+					String major = majorTf.getText();
+					if(!StudentForApp.isValid(major, "major")) {
 						JOptionPane.showMessageDialog(null, "학과/전공을 1~100글자 범위로 입력하세요.", "major", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!StudentForApp.isValid(numberTf.getText(), "number")) {
+					String numberString = numberTf.getText();
+					if(!StudentForApp.isValid(numberString, "number")) {
 						JOptionPane.showMessageDialog(null, "학번을 10자리 숫자로 입력하세요.", "number", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(containsStudentNumber(Integer.parseInt(numberTf.getText()))) {
+					int number = Integer.parseInt(numberString);
+					if(containsStudentNumber(number)) {
 						JOptionPane.showMessageDialog(null, "이미 회원가입된 학번입니다.", "containsStudentNumber", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!birthTf.getText().isBlank() && !StudentForApp.isValid(birthTf.getText(), "birth")) {
+					String birthString = birthTf.getText();
+					if(!birthString.isBlank() && !StudentForApp.isValid(birthString, "birth")) {
 						JOptionPane.showMessageDialog(null, "날짜를 yyyy-MM-dd 형식으로 입력해주세요.", "birth", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!phoneTf.getText().isBlank() && !StudentForApp.isValid(phoneTf.getText(), "phone")) {
+					LocalDate birth = birthString.isBlank() ? null : LocalDate.parse(birthString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					String phone = phoneTf.getText();
+					if(!phone.isBlank() && !StudentForApp.isValid(phone, "phone")) {
 						JOptionPane.showMessageDialog(null, "전화번호를 010-0000-0000 형식으로 입력해주세요.", "phone", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!emailTf.getText().isBlank() && !StudentForApp.isValid(emailTf.getText(), "email")) {
+					phone = phone.isBlank() ? null : phone;
+					String email = emailTf.getText();
+					if(!email.isBlank() && !StudentForApp.isValid(email, "email")) {
 						JOptionPane.showMessageDialog(null, "이메일을 이메일 형식으로 입력해주세요.", "email", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
+					email = email.isBlank() ? null : email;
+					getStudents().add(new StudentForApp(name, major, number, birth, phone, email));
 					clearTf();
 				}
 			});
 		}
 
-		public void clearTf() {
+		void clearTf() {
 			nameTf.setText("");
 			majorTf.setText("");
 			numberTf.setText("");
@@ -169,15 +193,18 @@ public class SchoolApplication extends JFrame {
 			loginBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					String number = numberTf.getText();
-					if(!StudentForApp.isValid(number, "number")) {
+					String numberString = numberTf.getText();
+					if(!StudentForApp.isValid(numberString, "number")) {
 						JOptionPane.showMessageDialog(null, "학번을 10자리 숫자로 입력하세요.", "number", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
-					if(!containsStudentNumber(Integer.parseInt(number))) {
+					int number = Integer.parseInt(numberString);
+					if(!containsStudentNumber(number)) {
 						JOptionPane.showMessageDialog(null, "존재하지 않거나 회원가입 되지 않은 학번입니다.", "containsStudentNumber", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
+					setStudent(getStudents().get(getStudentIndex(number)));
+					createMenu(1);
 				}
 			});
 		}
@@ -190,6 +217,19 @@ public class SchoolApplication extends JFrame {
 			}
 		}
 		return false;
+	}
+
+	private int getStudentIndex(int number) {
+		for(int i = 0; i < this.getStudents().size(); i++) {
+			if(this.getStudents().get(i).getNumber() == number) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private void setStudent(StudentForApp student) {
+		this.student = student;
 	}
 
 	public static void main(String[] args) {

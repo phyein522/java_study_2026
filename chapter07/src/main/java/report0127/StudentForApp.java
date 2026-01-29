@@ -23,10 +23,13 @@ public class StudentForApp {
 	private double averageGrade = 0;	//평균성적
 	private ArrayList<LectureForApp> lectures = new ArrayList<LectureForApp>(0);	//수강한 강의
 
-	public StudentForApp(String name, String major, int number) {
+	public StudentForApp(String name, String major, int number, LocalDate birth, String phone, String email) {
 		this.name = name;
 		this.major = major;
 		this.number = number;
+		this.birth = birth;
+		this.phone = phone;
+		this.email = email;
 	}
 
 	public void setTotalCredit(int totalCredit) { this.totalCredit = totalCredit; }
