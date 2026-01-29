@@ -17,16 +17,16 @@ public abstract class Animal {
 	public void poo(Object output) {
 		if(output instanceof String poo) {
 			if(!poo.isEmpty()) {
-				System.out.println("배설물이 나왔습니다.");
+				System.out.println(this.getSpecies() + ": 배설물이 나왔습니다.");
 			} else {
-				System.out.println("배설물이 나오지 않았습니다.");
+				System.out.println(this.getSpecies() + ": 배설물이 나오지 않았습니다.");
 			}
 		} else if(output instanceof String[] outputs) {
-			System.out.println("배설물과 뼈가 나왔습니다.");
+			System.out.println(this.getSpecies() + ": 배설물과 뼈가 나왔습니다.");
 		}
 	}
 
 	public void sleep() {
-		System.out.println("수면 중입니다.");
+		System.out.println(this.getSpecies() + ": 수면 중입니다.");
 	}
 }

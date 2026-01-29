@@ -7,18 +7,23 @@ public class Main {
 		Swam s = new Swam();
 		Fox f = new Fox();
 
-		r.eat(t);
-		r.eat(s);
-		r.eat(f);
-		r.poo(r.eat(s));
-		r.poo(r.eat(t));
-
-		t.poo(t.eat(r));
-		t.poo(t.eat(f));
-
-		f.breathe();
 		r.jumping();
 		t.sound();
 		f.sound();
+
+		Animal[] animals = new Animal[4];
+		animals[0] = r;
+		animals[1] = t;
+		animals[2] = s;
+		animals[3] = f;
+		for(Animal animal : animals) {
+			System.out.println();
+			animal.poo(animal.eat(r));
+			animal.poo(animal.eat(t));
+			animal.poo(animal.eat(s));
+			animal.poo(animal.eat(f));
+			animal.sleep();
+			animal.breathe();
+		}
 	}
 }
