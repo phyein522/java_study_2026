@@ -40,28 +40,16 @@ public class LectureForApp {
 	public static boolean isValid(String input, String check) {
 		switch(check) {
 			case "subject":
-				if(input == null || input.isBlank() || input.length() > 100) {
-					System.out.println("과목명을 1~100글자 범위로 입력하세요.");
-					return false;
-				}
+				if(input == null || input.isBlank() || input.length() > 100) { return false; }
 				break;
 			case "credit":
-				if(!input.matches("[0-9]{1,3}")) {
-					System.out.println("학점을 0~100 범위로 입력하세요.");
-					return false;
-				}
+				if(!input.matches("[0-9]{1,3}")) { return false; }
 				break;
 			case "grade":
-				if(!input.matches("^[A-DFa-df]([0+])?$")) {
-					System.out.println("성적을 F~A+ 범위로 입력하세요.");
-					return false;
-				}
+				if(!input.matches("^[A-DFa-df]([0+])?$")) { return false; }
 				break;
 			case "takeDate":
-				if(!input.matches("[0-9]{4}-[0-9]{1}")) {
-					System.out.println("수강일을 년도-학기 형식(예: 2000-3)으로 입력하세요.");
-					return false;
-				}
+				if(!input.matches("[0-9]{4}-[0-9]{2}")) { return false; }
 				break;
 			case "divide":
 				switch(input) {
@@ -75,7 +63,6 @@ public class LectureForApp {
 					case "REFINEMENT":
 						break;
 					default:
-						System.out.println("구분을 전공/교양 중에서 입력하세요.");
 						return false;
 				}
 				break;

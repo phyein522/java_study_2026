@@ -28,6 +28,7 @@ public class SchoolApplication extends JFrame {
 	}
 
 	void createMenu(int state) {
+		getContentPane().removeAll();
 		JMenuBar mb = new JMenuBar();
 		switch(state) {
 			case 0:
@@ -65,15 +66,62 @@ public class SchoolApplication extends JFrame {
 				JMenuItem lectureListMenuItem = new JMenuItem("강의 목록");
 				JMenuItem lectureAddMenuItem = new JMenuItem("강의 추가");
 				JMenuItem lectureRemoveMenuItem = new JMenuItem("강의 삭제");
+				lectureListMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						setContentPane(new LectureListPane());
+					}
+				});
+				lectureAddMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+				lectureRemoveMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+				lectureMenu.add(lectureListMenuItem);
+				lectureMenu.add(lectureAddMenuItem);
+				lectureMenu.add(lectureRemoveMenuItem);
 
 				JMenu myPageMenu = new JMenu("마이페이지");
 				JMenuItem logoutMenuItem = new JMenuItem("로그아웃");
 				JMenuItem signOutMenuItem = new JMenuItem("회원탈퇴");
 				JMenuItem informationMenuItem = new JMenuItem("회원 정보");	//회원 정보 수정 버튼 포함
+				informationMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+				signOutMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+				logoutMenuItem.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+				myPageMenu.add(informationMenuItem);
+				myPageMenu.add(signOutMenuItem);
+				myPageMenu.add(logoutMenuItem);
+
+				mb.add(lectureMenu);
+				mb.add(myPageMenu);
 
 				break;
 		}
 		setJMenuBar(mb);
+		revalidate();
+		repaint();
 	}
 
 	class SignupPane extends JPanel {
@@ -204,9 +252,229 @@ public class SchoolApplication extends JFrame {
 						return;
 					}
 					setStudent(getStudents().get(getStudentIndex(number)));
+					numberTf.setText("");
 					createMenu(1);
 				}
 			});
+		}
+	}
+
+	class LectureListPane extends JPanel {
+		LectureListPane() {
+			//임시, 수정 필요
+			setLayout(new FlowLayout());
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(getStudents().size() + 1, 5));
+			panel.add(new JLabel("강의명"));
+			panel.add(new JLabel("학점"));
+			panel.add(new JLabel("성적"));
+			panel.add(new JLabel("수강일"));
+			panel.add(new JLabel("구분"));
+			addLectureList(panel);
+
+			JScrollPane scrollPane = new JScrollPane(panel);
+			add(scrollPane);
+		}
+
+		void addLectureList(JPanel panel) {
+			for(LectureForApp lecture : getStudent().getLectures()) {
+				panel.add(new JLabel(lecture.getSubject()));
+				panel.add(new JLabel(String.valueOf(lecture.getCredit())));
+				panel.add(new JLabel(switch(String.valueOf(lecture.getGrade())) {
+					case "4.5" -> "A+";
+					case "4.0" -> "A";
+					case "3.5" -> "B+";
+					case "3.0" -> "B";
+					case "2.5" -> "C+";
+					case "2.0" -> "C";
+					case "1.5" -> "D+";
+					case "1.0" -> "D";
+					default -> "F";
+				}));
+				panel.add(new JLabel(lecture.getTakeDate()));
+				panel.add(new JLabel(lecture.getDivide()));
+			}
+		}
+	}
+
+	class LectureAddPane extends JPanel {
+		JTextField subjectTf;
+		JTextField creditTf;
+		JRadioButton[] gradeRadioButtons;
+		JRadioButton A_plus;
+		JRadioButton A;
+		JRadioButton B_plus;
+		JRadioButton B;
+		JRadioButton C_plus;
+		JRadioButton C;
+		JRadioButton D_plus;
+		JRadioButton D;
+		JRadioButton F;
+		GradeListener gradeListener;
+		JTextField takeDateTf;
+		JRadioButton divideMajor;
+		JRadioButton divideRefinement;
+		DivideListener divideListener;
+		JButton clearBtn;
+		JButton addBtn;
+
+		LectureAddPane() {
+			setLayout(new GridLayout(6, 2));
+
+			add(new JLabel("과목/강의명"));
+			subjectTf = new JTextField(100);
+			add(subjectTf);
+
+			add(new JLabel("학점"));
+			creditTf = new JTextField(3);
+			add(creditTf);
+
+			add(new JLabel("성적"));
+			JPanel gradePanel = new JPanel();
+			gradePanel.setLayout(new GridLayout(9, 1));
+			A_plus = new JRadioButton("A+");
+			A = new JRadioButton("A");
+			B_plus = new JRadioButton("B+");
+			B = new JRadioButton("B");
+			C_plus = new JRadioButton("C+");
+			C = new JRadioButton("C");
+			D_plus = new JRadioButton("D+");
+			D = new JRadioButton("D");
+			F = new JRadioButton("F");
+			gradeRadioButtons[0] = A_plus;
+			gradeRadioButtons[1] = A;
+			gradeRadioButtons[2] = B_plus;
+			gradeRadioButtons[3] = B;
+			gradeRadioButtons[4] = C_plus;
+			gradeRadioButtons[5] = C;
+			gradeRadioButtons[6] = D_plus;
+			gradeRadioButtons[7] = D;
+			gradeRadioButtons[8] = F;
+			gradeListener = new GradeListener();
+			for(JRadioButton gradeRadioButton : gradeRadioButtons) {
+				gradeRadioButton.addItemListener(gradeListener);
+				gradePanel.add(gradeRadioButton);
+			}
+
+			add(new JLabel("수강일"));
+			takeDateTf = new JTextField(7);
+			add(takeDateTf);
+
+			add(new JLabel("구분"));
+			JPanel dividePanel = new JPanel();
+			dividePanel.setLayout(new GridLayout(1, 2));
+			divideMajor = new JRadioButton("전공");
+			divideRefinement = new JRadioButton("교양");
+			divideListener = new DivideListener();
+			divideMajor.addItemListener(divideListener);
+			divideRefinement.addItemListener(divideListener);
+			dividePanel.add(divideMajor);
+			dividePanel.add(divideRefinement);
+
+			clearBtn = new JButton("초기화");
+			addBtn = new JButton("추가");
+			clearBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					clear();
+				}
+			});
+			addBtn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					String subject = subjectTf.getText();
+					if(!LectureForApp.isValid(subject, "subject")) {
+						JOptionPane.showMessageDialog(null, "과목/강의명을 1~100글자 범위로 입력하세요.", "subject", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					String creditString = creditTf.getText();
+					if(!LectureForApp.isValid(creditString, "credit")) {
+						JOptionPane.showMessageDialog(null, "", "credit", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					int credit = Integer.parseInt(creditString);
+					double grade = gradeListener.getGrade();
+					if(!LectureForApp.isValid(String.valueOf(grade), "grade")) {
+						JOptionPane.showMessageDialog(null, "성적을 F~A+ 범위로 입력하세요.", "grade", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					String takeDate = takeDateTf.getText();
+					if(!LectureForApp.isValid(takeDate, "takeDate")) {
+						JOptionPane.showMessageDialog(null, "수강일을 년도-학기 형식(예: 2000-3)으로 입력하세요.", "takeDate", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					String divide = divideListener.getDivide();
+					if(!LectureForApp.isValid(divide, "divide")) {
+						JOptionPane.showMessageDialog(null, "구분을 전공/교양 중에서 입력하세요.", "divide", JOptionPane.WARNING_MESSAGE);
+						return;
+					}
+					getStudent().addLecture(subject, credit, grade, takeDate, divide);
+					clear();
+				}
+			});
+			add(clearBtn);
+			add(addBtn);
+
+			clear();
+		}
+
+		void clear() {
+			subjectTf.setText("");
+			creditTf.setText("");
+			for(JRadioButton gradeRadioButton : gradeRadioButtons) {
+				gradeRadioButton.setSelected(false);
+			}
+			takeDateTf.setText("");
+			divideMajor.setSelected(false);
+			divideRefinement.setSelected(false);
+		}
+
+		class GradeListener implements ItemListener {
+			double grade;
+
+			double getGrade() {
+				return this.grade;
+			}
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					if(e.getItem() == A_plus) {
+						grade = LectureForApp.A_PLUS;
+					} else if(e.getItem() == A) {
+						grade = LectureForApp.A;
+					} else if(e.getItem() == B_plus) {
+						grade = LectureForApp.B_PLUS;
+					} else if(e.getItem() == B) {
+						grade = LectureForApp.B;
+					} else if(e.getItem() == C_plus) {
+						grade = LectureForApp.C_PLUS;
+					} else if(e.getItem() == C) {
+						grade = LectureForApp.C;
+					} else {
+						grade = LectureForApp.F;
+					}
+				}
+			}
+		}
+
+		class DivideListener implements ItemListener {
+			String divide;
+
+			String getDivide() {
+				return this.divide;
+			}
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					if(e.getItem() == divideRefinement) {
+						divide = "REFINEMENT";
+					} else {
+						divide = "MAJOR";
+					}
+				}
+			}
 		}
 	}
 

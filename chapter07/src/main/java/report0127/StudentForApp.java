@@ -63,7 +63,7 @@ public class StudentForApp {
 		return true;
 	}
 
-	public void takeLecture(String subject, int credit, double grade, String takeDate, String divide) {
+	public void addLecture(String subject, int credit, double grade, String takeDate, String divide) {
 		this.getLectures().add(new LectureForApp(subject, credit, grade, takeDate, divide));
 	}
 }
