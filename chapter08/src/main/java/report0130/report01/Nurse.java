@@ -13,6 +13,10 @@ public class Nurse {
 	private AnimalPatient[] animalPatients = new AnimalPatient[0];
 	private int[][] counter = new int[0][2];	//tookMedicine, visited
 
+	public Nurse() {
+		this.startWork();
+	}
+
 	private void setAnimalPatients(AnimalPatient[] animalPatients) {
 		this.animalPatients = animalPatients;
 	}
@@ -217,6 +221,7 @@ public class Nurse {
 	}
 
 	public void startWork() {
+		System.out.println("출근합니다.");
 		Scanner scanner = new Scanner(System.in);
 		String select = "";
 		while(select != "5") {
@@ -238,6 +243,9 @@ public class Nurse {
 				case "4":
 					printAnimalPatientList();
 					break;
+				case "5":
+					System.out.println("퇴근합니다.");
+					return;
 			}
 		}
 	}
