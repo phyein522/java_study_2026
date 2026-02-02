@@ -14,7 +14,7 @@ public class Nurse {
 	private int[][] counter = new int[0][2];	//tookMedicine, visited
 
 	public Nurse() {
-		this.startWork();
+//		this.startWork();
 	}
 
 	private void setAnimalPatients(AnimalPatient[] animalPatients) {
@@ -24,29 +24,85 @@ public class Nurse {
 		this.counter = counter;
 	}
 
-	private void record() {
-//		if(obj instanceof Cat animal) {
-//			String name = animal.getName();
-//			String owner = animal.getOwner();
-//			String species = animal.getSpecies();
-			//해당 객체가 이미 배열에 있는지 확인 필요
-//			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//			LocalDate hospitalization;
-//			try {
-//				hospitalization = LocalDate.parse(hospitalizationDateString, formatter);
-//			} catch (DateTimeParseException e) {
-//				hospitalization = LocalDate.now();
-//			}
-//			LocalDate dischargeDate;
-//			try {
-//				dischargeDate = LocalDate.parse(dischargeDateString, formatter);
-//			} catch (DateTimeParseException e) {
-//				dischargeDate = LocalDate.now();
-//			}
-//			String number = String.valueOf(this.getAnimalPatients().length);
-//			AnimalPatient animalPatient = new AnimalPatient(name, owner, species, doctorInCharge, hospitalization, dischargeDate, number);
-//			addAnimalPatient(animalPatient);
-//		}
+	public void record(Object animal) {
+		if(animal == null) {
+			return;
+		}
+
+		String name = "";
+		String owner = "";
+		String species = "";
+		if(animal instanceof Cat cat) {
+			name = cat.getName();
+			owner = cat.getOwner();
+			species = cat.getSpecies();
+		} else if(animal instanceof Parrot parrot) {
+			name = parrot.getName();
+			owner = parrot.getOwner();
+			species = parrot.getSpecies();
+		} else if(animal instanceof LargeDog largeDog) {
+			name = largeDog.getName();
+			owner = largeDog.getOwner();
+			species = largeDog.getSpecies();
+		} else if(animal instanceof SmallDog smallDog) {
+			name = smallDog.getName();
+			owner = smallDog.getOwner();
+			species = smallDog.getSpecies();
+		} else if(animal instanceof Rabbit rabbit) {
+			name = rabbit.getName();
+			owner = rabbit.getOwner();
+			species = rabbit.getSpecies();
+		}
+		if(containAnimal(name, owner, species)) {
+			System.out.println("해당 환자는 이미 기록됐습니다.");
+			return;
+		}
+
+		Scanner scanner = new Scanner(System.in);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		String hospitalizationDateString;
+		LocalDate hospitalization = LocalDate.now();
+		do {
+			System.out.print("입원일 (yyyy-MM-dd):  ");
+			hospitalizationDateString = scanner.nextLine();
+			try {
+				hospitalization = LocalDate.parse(hospitalizationDateString, formatter);
+			} catch (DateTimeParseException e) {
+				System.out.println("입원일을 yyyy-MM-dd 형태로 입력하세요.");
+				hospitalizationDateString = "";
+			}
+		} while(hospitalizationDateString.isBlank());
+
+		String dischargeDateString;
+		LocalDate dischargeDate = LocalDate.now();
+		do {
+			System.out.print("퇴원일 (yyyy-MM-dd):  ");
+			dischargeDateString = scanner.nextLine();
+			try {
+				dischargeDate = LocalDate.parse(dischargeDateString, formatter);
+			} catch (DateTimeParseException e) {
+				System.out.println("퇴원일을 yyyy-MM-dd 형태로 입력하세요.");
+				dischargeDateString = "";
+			}
+		} while(dischargeDateString.isBlank());
+
+		String doctorInCharge;
+		do {
+			System.out.print("담당 의사:  ");
+			doctorInCharge = scanner.nextLine();
+		} while(doctorInCharge.isBlank());
+		if(doctorInCharge.length() > 100) {
+			doctorInCharge = doctorInCharge.substring(0, 99);
+		}
+
+		String number = String.valueOf(this.getAnimalPatients().length);
+
+		AnimalPatient animalPatient = new AnimalPatient(name, owner, species, doctorInCharge, hospitalization, dischargeDate, number);
+		addAnimalPatient(animalPatient);
+
+		/*
 		Scanner scanner = new Scanner(System.in);
 
 		String name;
@@ -127,9 +183,10 @@ public class Nurse {
 
 		AnimalPatient animalPatient = new AnimalPatient(name, owner, species, doctorInCharge, hospitalization, dischargeDate, number);
 		addAnimalPatient(animalPatient);
-	}
+		*/
+}
 
-	private void addAnimalPatient(AnimalPatient animalPatient) {
+	public void addAnimalPatient(AnimalPatient animalPatient) {
 		AnimalPatient[] newAnimalPatients = new AnimalPatient[this.getAnimalPatients().length + 1];
 		System.arraycopy(this.getAnimalPatients(), 0, newAnimalPatients, 0, this.getAnimalPatients().length);
 		newAnimalPatients[this.getAnimalPatients().length] = animalPatient;
@@ -140,7 +197,7 @@ public class Nurse {
 		this.setCounter(newCounter);
 	}
 
-	private void takeMedicine() {
+	public void takeMedicine() {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.print("이름 혹은 식별번호:  ");
@@ -161,13 +218,13 @@ public class Nurse {
 		System.out.println(name + "환자에게 약을 먹였습니다. (오늘 약을 먹인 횟수: " + this.getCounter()[index][0] + ")");
 	}
 
-	private void visit() {
+	public void visit() {
 		Scanner scanner = new Scanner(System.in);
 
 		String timeString;
 		LocalTime time = LocalTime.now();
 		do {
-			System.out.print("면회 시간:  ");
+			System.out.print("면회 시간 (HH:mm, 15:00~20:00):  ");
 			timeString = scanner.nextLine();
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -200,13 +257,13 @@ public class Nurse {
 		System.out.println(name + "환자가 면회를 했습니다. (오늘 면회한 횟수: " + this.getCounter()[index][1] + ")");
 	}
 
-	private int findIndex(String input) {
+	public int findIndex(String input) {
 		int index = -1;
 		try {
-			index = Integer.parseInt(input);
+			index = Integer.parseInt(input);	//입력값이 식별번호
 		} catch(NumberFormatException e) {
 			for(int i = 0; i < this.getAnimalPatients().length; i++) {
-				if(this.getAnimalPatients()[i].getName().equals(input)) {
+				if(this.getAnimalPatients()[i].getName().equals(input)) {	//입력값이 이름
 					index = i;
 					break;
 				}
@@ -215,7 +272,16 @@ public class Nurse {
 		return index;
 	}
 
-	private void printAnimalPatientsList() {
+	public boolean containAnimal(String name, String owner, String species) {
+		for(AnimalPatient animalPatient : this.getAnimalPatients()) {
+			if(animalPatient.getName().equals(name) && animalPatient.getOwner().equals(owner) && animalPatient.getSpecies().equals(species)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void printAnimalPatientsList() {
 		for(AnimalPatient animalPatient: this.getAnimalPatients()) {
 			System.out.printf("환자 이름: %s \t", animalPatient.getName());
 			System.out.printf("주인 이름: %s \t", animalPatient.getOwner());
@@ -226,7 +292,7 @@ public class Nurse {
 			System.out.printf("식별 번호: %s \t\n", animalPatient.getNumber());
 		}
 	}
-
+/*
 	public void startWork() {
 		System.out.println("출근합니다.");
 		Scanner scanner = new Scanner(System.in);
@@ -255,4 +321,5 @@ public class Nurse {
 			}
 		}
 	}
+*/
 }

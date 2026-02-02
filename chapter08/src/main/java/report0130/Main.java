@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class Main {
 	private Object[] animals = new Object[0];
 
+	public Main() {
+		this.start();
+	}
+
 	public void printAnimalsList() {
 		for(Object animal : animals) {
 			String name;
@@ -108,36 +112,111 @@ public class Main {
 		this.animals = animals;
 	}
 
-//	public void start() {
-//		Scanner scanner = new Scanner(System.in);
-//		Nurse nurse = new Nurse();
-//		while(true) {
-//			System.out.println("\n\n--------------------------------------------------");
-//			System.out.println("1. 환자 기록 | 2. 약 먹이기 | 3. 환자 면회 | 4. 환자 목록 확인 | 5. 종료 | 6. 동물 목록 | 6. 동물 추가");
-//			System.out.println("--------------------------------------------------");
-//			System.out.print(">>  ");
-//			String select = scanner.nextLine();
-//			switch(select) {
-//				case "1":
-//					nurse.record();
-//					break;
-//				case "2":
-//					nurse.takeMedicine();
-//					break;
-//				case "3":
-//					nurse.visit();
-//					break;
-//				case "4":
-//					nurse.printAnimalPatientsList();
-//					break;
-//				case "5":
-//					System.out.println("종료합니다.");
-//					return;
-//			}
-//		}
-//	}
+	public void start() {
+		Scanner scanner = new Scanner(System.in);
+		Nurse nurse = new Nurse();
+		while(true) {
+			System.out.println("\n\n----------------------------------------------------------------------------------------------------");
+			System.out.println("1. 환자 기록 | 2. 약 먹이기 | 3. 환자 면회 | 4. 환자 목록 확인 | 5. 종료 | 6. 동물 목록 | 7. 동물 추가");
+			System.out.println("----------------------------------------------------------------------------------------------------");
+			System.out.print(">>  ");
+			String select = scanner.nextLine();
+			switch(select) {
+				case "1":
+					nurse.record(this.findAnimal());
+					break;
+				case "2":
+					nurse.takeMedicine();
+					break;
+				case "3":
+					nurse.visit();
+					break;
+				case "4":
+					nurse.printAnimalPatientsList();
+					break;
+				case "5":
+					System.out.println("종료합니다.");
+					return;
+				case "6":
+					this.printAnimalsList();
+					break;
+				case "7":
+					this.addAnimal();
+					break;
+			}
+		}
+	}
+
+	public Object findAnimal() {
+		Scanner scanner = new Scanner(System.in);
+
+		String name;
+		do {
+			System.out.print("이름:  ");
+			name = scanner.nextLine();
+		} while(name.isBlank());
+		if(name.length() > 100) {
+			name = name.substring(0, 99);
+		}
+
+		String owner;
+		do {
+			System.out.print("주인 이름:  ");
+			owner = scanner.nextLine();
+		} while(owner.isBlank());
+		if(owner.length() > 100) {
+			owner = owner.substring(0, 99);
+		}
+
+		String species;
+		do {
+			System.out.print("종 (1: 고양이, 2: 앵무새, 3: 대형견, 4: 소형견, 5: 토끼):  ");
+			species = switch(scanner.nextLine()) {
+				case "1" -> AnimalPatient.CAT;
+				case "2" -> AnimalPatient.PARROT;
+				case "3" -> AnimalPatient.LARGE_DOG;
+				case "4" -> AnimalPatient.SMALL_DOG;
+				case "5" -> AnimalPatient.RABBIT;
+				default -> "";
+			};
+		} while(species.isBlank());
+
+		String getName = "";
+		String getOwner = "";
+		String getSpecies = "";
+		for(Object animal : this.getAnimals()) {
+			if(animal instanceof Cat cat) {
+				getName = cat.getName();
+				getOwner = cat.getOwner();
+				getSpecies = cat.getSpecies();
+			} else if(animal instanceof Parrot parrot) {
+				getName = parrot.getName();
+				getOwner = parrot.getOwner();
+				getSpecies = parrot.getSpecies();
+			} else if(animal instanceof LargeDog largeDog) {
+				getName = largeDog.getName();
+				getOwner = largeDog.getOwner();
+				getSpecies = largeDog.getSpecies();
+			} else if(animal instanceof SmallDog smallDog) {
+				getName = smallDog.getName();
+				getOwner = smallDog.getOwner();
+				getSpecies = smallDog.getSpecies();
+			} else if(animal instanceof Rabbit rabbit) {
+				getName = rabbit.getName();
+				getOwner = rabbit.getOwner();
+				getSpecies = rabbit.getSpecies();
+			}
+			if(getName.equals(name) && getOwner.equals(owner) && getSpecies.equals(species)) {
+				return animal;
+			}
+		}
+
+		System.out.println("해당 동물은 목록에 없습니다.");
+		return null;
+	}
 
 	public static void main(String[] args) {
-		 new Nurse();
+//		new Nurse();
+		new Main();
 	}
 }
