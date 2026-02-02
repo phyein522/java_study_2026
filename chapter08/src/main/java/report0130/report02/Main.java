@@ -1,13 +1,13 @@
-package report0130;
+package report0130.report02;
 
 import lombok.Getter;
-import report0130.report01.*;
+import report0130.report02.*;
 
 import java.util.Scanner;
 
 @Getter
 public class Main {
-	private Object[] animals = new Object[0];
+	private Animal[] animals = new Animal[0];
 
 	public Main() {
 		this.start();
@@ -18,26 +18,10 @@ public class Main {
 			String name;
 			String owner;
 			String species;
-			if(animal instanceof Cat cat) {
-				name = cat.getName();
-				owner = cat.getOwner();
-				species = cat.getSpecies();
-			} else if(animal instanceof Parrot parrot) {
-				name = parrot.getName();
-				owner = parrot.getOwner();
-				species = parrot.getSpecies();
-			} else if(animal instanceof LargeDog largeDog) {
-				name = largeDog.getName();
-				owner = largeDog.getOwner();
-				species = largeDog.getSpecies();
-			} else if(animal instanceof SmallDog smallDog) {
-				name = smallDog.getName();
-				owner = smallDog.getOwner();
-				species = smallDog.getSpecies();
-			} else if(animal instanceof Rabbit rabbit) {
-				name = rabbit.getName();
-				owner = rabbit.getOwner();
-				species = rabbit.getSpecies();
+			if(animal instanceof Animal a) {
+				name = a.getName();
+				owner = a.getOwner();
+				species = a.getSpecies();
 			} else {
 				System.out.println("목록에 동물이 없습니다.");
 				return;
@@ -101,14 +85,14 @@ public class Main {
 		}
 	}
 
-	public void addAnimalList(Object animal) {
-		Object[] newAnimals = new Object[this.getAnimals().length + 1];
+	public void addAnimalList(Animal animal) {
+		Animal[] newAnimals = new Animal[this.getAnimals().length + 1];
 		System.arraycopy(this.getAnimals(), 0, newAnimals, 0, this.getAnimals().length);
 		newAnimals[this.getAnimals().length] = animal;
 		this.setAnimals(newAnimals);
 	}
 
-	private void setAnimals(Object[] animals) {
+	private void setAnimals(Animal[] animals) {
 		this.animals = animals;
 	}
 
@@ -147,7 +131,7 @@ public class Main {
 		}
 	}
 
-	public Object findAnimal() {
+	public Animal findAnimal() {
 		Scanner scanner = new Scanner(System.in);
 
 		String name;
@@ -184,27 +168,11 @@ public class Main {
 		String getName = "";
 		String getOwner = "";
 		String getSpecies = "";
-		for(Object animal : this.getAnimals()) {
-			if(animal instanceof Cat cat) {
-				getName = cat.getName();
-				getOwner = cat.getOwner();
-				getSpecies = cat.getSpecies();
-			} else if(animal instanceof Parrot parrot) {
-				getName = parrot.getName();
-				getOwner = parrot.getOwner();
-				getSpecies = parrot.getSpecies();
-			} else if(animal instanceof LargeDog largeDog) {
-				getName = largeDog.getName();
-				getOwner = largeDog.getOwner();
-				getSpecies = largeDog.getSpecies();
-			} else if(animal instanceof SmallDog smallDog) {
-				getName = smallDog.getName();
-				getOwner = smallDog.getOwner();
-				getSpecies = smallDog.getSpecies();
-			} else if(animal instanceof Rabbit rabbit) {
-				getName = rabbit.getName();
-				getOwner = rabbit.getOwner();
-				getSpecies = rabbit.getSpecies();
+		for(Animal animal : this.getAnimals()) {
+			if(animal instanceof Animal a) {
+				getName = a.getName();
+				getOwner = a.getOwner();
+				getSpecies = a.getSpecies();
 			}
 			if(getName.equals(name) && getOwner.equals(owner) && getSpecies.equals(species)) {
 				return animal;
