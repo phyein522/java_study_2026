@@ -29,14 +29,9 @@ public class Nurse {
 			return;
 		}
 
-		String name = "";
-		String owner = "";
-		String species = "";
-		if(animal instanceof Animal a) {
-			name = a.getName();
-			owner = a.getOwner();
-			species = a.getSpecies();
-		}
+		String name = animal.getName();
+		String owner = animal.getOwner();
+		String species = animal.getSpecies();
 		if(containAnimal(name, owner, species)) {
 			System.out.println("해당 환자는 이미 기록됐습니다.");
 			return;

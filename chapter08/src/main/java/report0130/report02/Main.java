@@ -165,15 +165,13 @@ public class Main {
 			};
 		} while(species.isBlank());
 
-		String getName = "";
-		String getOwner = "";
-		String getSpecies = "";
+		String getName;
+		String getOwner;
+		String getSpecies;
 		for(Animal animal : this.getAnimals()) {
-			if(animal instanceof Animal a) {
-				getName = a.getName();
-				getOwner = a.getOwner();
-				getSpecies = a.getSpecies();
-			}
+				getName = animal.getName();
+				getOwner = animal.getOwner();
+				getSpecies = animal.getSpecies();
 			if(getName.equals(name) && getOwner.equals(owner) && getSpecies.equals(species)) {
 				return animal;
 			}
