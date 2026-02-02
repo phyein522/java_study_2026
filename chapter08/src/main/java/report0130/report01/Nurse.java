@@ -57,6 +57,12 @@ public class Nurse {
 			System.out.println("해당 환자는 이미 기록됐습니다.");
 			return;
 		}
+		if(switch(species) {
+			case AnimalPatient.CAT, AnimalPatient.PARROT, AnimalPatient.LARGE_DOG, AnimalPatient.SMALL_DOG, AnimalPatient.RABBIT -> false;
+			default -> true;
+		}) {
+			System.out.println("해당 동물 병원은 고양이, 앵무새, 대형견, 소형견, 토끼 동물 환자만 받습니다.");
+		}
 
 		Scanner scanner = new Scanner(System.in);
 

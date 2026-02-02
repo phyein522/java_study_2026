@@ -1,7 +1,6 @@
-package report0130.report02;
+package report0130.report04;
 
 import lombok.Getter;
-import report0130.report02.*;
 
 import java.util.Scanner;
 
@@ -37,13 +36,15 @@ public class Main {
 
 		String species;
 		do {
-			System.out.print("종 (1: 고양이, 2: 앵무새, 3: 대형견, 4: 소형견, 5: 토끼):  ");
+			System.out.print("종 (1: 고양이, 2: 앵무새, 3: 대형견, 4: 소형견, 5: 토끼, 6: 닭, 7: 고슴도치):  ");
 			species = switch(scanner.nextLine()) {
 				case "1" -> AnimalPatient.CAT;
 				case "2" -> AnimalPatient.PARROT;
 				case "3" -> AnimalPatient.LARGE_DOG;
 				case "4" -> AnimalPatient.SMALL_DOG;
 				case "5" -> AnimalPatient.RABBIT;
+				case "6" -> AnimalPatient.CHICKEN;
+				case "7" -> AnimalPatient.HEDGEHOG;
 				default -> "";
 			};
 		} while(species.isBlank());
@@ -81,6 +82,12 @@ public class Main {
 				break;
 			case AnimalPatient.RABBIT:
 				addAnimalList(new Rabbit(name, owner));
+				break;
+			case AnimalPatient.CHICKEN:
+				addAnimalList(new Chicken(name, owner));
+				break;
+			case AnimalPatient.HEDGEHOG:
+				addAnimalList(new Hedgehog(name, owner));
 				break;
 		}
 	}
@@ -154,13 +161,15 @@ public class Main {
 
 		String species;
 		do {
-			System.out.print("종 (1: 고양이, 2: 앵무새, 3: 대형견, 4: 소형견, 5: 토끼):  ");
+			System.out.print("종 (1: 고양이, 2: 앵무새, 3: 대형견, 4: 소형견, 5: 토끼, 6: 닭, 7: 고슴도치):  ");
 			species = switch(scanner.nextLine()) {
 				case "1" -> AnimalPatient.CAT;
 				case "2" -> AnimalPatient.PARROT;
 				case "3" -> AnimalPatient.LARGE_DOG;
 				case "4" -> AnimalPatient.SMALL_DOG;
 				case "5" -> AnimalPatient.RABBIT;
+				case "6" -> AnimalPatient.CHICKEN;
+				case "7" -> AnimalPatient.HEDGEHOG;
 				default -> "";
 			};
 		} while(species.isBlank());
