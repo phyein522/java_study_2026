@@ -29,6 +29,7 @@ public class Nurse {
 //			String name = animal.getName();
 //			String owner = animal.getOwner();
 //			String species = animal.getSpecies();
+			//해당 객체가 이미 배열에 있는지 확인 필요
 //			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //			LocalDate hospitalization;
 //			try {
@@ -69,7 +70,7 @@ public class Nurse {
 		//고양이, 앵무새, 대형견, 소형견, 토끼
 		String species;
 		do {
-			System.out.print("종을 입력하세요. (입원 가능 종: 고양이, 앵무새, 대형견, 소형견, 토끼):  ");
+			System.out.print("종을 입력하세요. (입원 가능 종: 고양이(CAT), 앵무새(PARROT), 대형견(LARGE_DOG), 소형견(SMALL_DOG), 토끼(RABBIT)):  ");
 			species = scanner.nextLine();
 			species = switch(species) {
 				case "고양이", "cat", "Cat", "CAT" -> "CAT";
@@ -214,22 +215,27 @@ public class Nurse {
 		return index;
 	}
 
-	private void printAnimalPatientList() {
+	private void printAnimalPatientsList() {
 		for(AnimalPatient animalPatient: this.getAnimalPatients()) {
-			System.out.printf("환자 이름: %s \t주인 이름: %s \t종: %s\t담당 의사: %s \t입원일: %s \t퇴원일: %s \t식별 번호: %s \n", animalPatient.getName(), animalPatient.getOwner(), animalPatient.getSpecies(), animalPatient.getDoctorInCharge(), animalPatient.getHospitalizationDate(), animalPatient.getDischargeDate(), animalPatient.getNumber());
+			System.out.printf("환자 이름: %s \t", animalPatient.getName());
+			System.out.printf("주인 이름: %s \t", animalPatient.getOwner());
+			System.out.printf("종: %s \t", animalPatient.getSpecies());
+			System.out.printf("담당 의사: %s \t", animalPatient.getDoctorInCharge());
+			System.out.printf("입원일: %s \t", animalPatient.getHospitalizationDate());
+			System.out.printf("퇴원일: %s \t", animalPatient.getDischargeDate());
+			System.out.printf("식별 번호: %s \t\n", animalPatient.getNumber());
 		}
 	}
 
 	public void startWork() {
 		System.out.println("출근합니다.");
 		Scanner scanner = new Scanner(System.in);
-		String select = "";
-		while(select != "5") {
+		while(true) {
 			System.out.println("\n\n--------------------------------------------------");
 			System.out.println("1. 환자 기록 | 2. 약 먹이기 | 3. 환자 면회 | 4. 환자 목록 확인 | 5. 퇴근");
 			System.out.println("--------------------------------------------------");
 			System.out.print(">>  ");
-			select = scanner.nextLine();
+			String select = scanner.nextLine();
 			switch(select) {
 				case "1":
 					record();
@@ -241,7 +247,7 @@ public class Nurse {
 					visit();
 					break;
 				case "4":
-					printAnimalPatientList();
+					printAnimalPatientsList();
 					break;
 				case "5":
 					System.out.println("퇴근합니다.");

@@ -3,12 +3,12 @@ package report0130.report01;
 import lombok.Getter;
 
 @Getter
-public class Cat {
+public class LargeDog {
 	private String name;
 	private String owner;
-	private final String species = "CAT";
+	private final String species = "LARGE_DOG";
 
-	public Cat(String name, String owner) {
+	public LargeDog(String name, String owner) {
 		this.name = name;
 		this.owner = owner;
 	}
