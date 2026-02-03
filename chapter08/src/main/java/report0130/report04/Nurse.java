@@ -181,20 +181,20 @@ public class Nurse {
 
 		System.out.print("이름 혹은 식별번호:  ");
 		String input = scanner.nextLine();
-		int index = this.findIndex(input);
-		if(index < 0) {
+		int[] index = this.findIndex(input);
+		if(index[0] < 0 || index[1] < 0) {
 			System.out.println(input + "은/는 존재하지 않는 환자입니다.");
 			return;
 		}
 
-		String name = this.getAnimalPatients()[index].getName();
-		if(this.getCounter()[index][1] >= 1) {
+		String name = this.getAnimalPatients()[index[0]][index[1]].getName();
+		if(this.getVisitCounter()[index[0]][index[1]] >= 1) {
 			System.out.println(name + " 환자는 이미 면회를 했습니다.");
 			return;
 		}
 
-		this.getCounter()[index][1]++;
-		System.out.println(name + "환자가 면회를 했습니다. (오늘 면회한 횟수: " + this.getCounter()[index][1] + ")");
+		this.getVisitCounter()[index[0]][index[1]]++;
+		System.out.println(name + "환자가 면회를 했습니다. (오늘 면회한 횟수: " + this.getVisitCounter()[index[0]][index[1]] + ")");
 	}
 
 	public int[] findIndex(String input) {
@@ -218,23 +218,27 @@ public class Nurse {
 	}
 
 	public boolean containAnimal(String name, String owner, String species) {
-		for(AnimalPatient animalPatient : this.getAnimalPatients()) {
-			if(animalPatient.getName().equals(name) && animalPatient.getOwner().equals(owner) && animalPatient.getSpecies().equals(species)) {
-				return true;
+		for(AnimalPatient[] animalPatients : this.getAnimalPatients()) {
+			for(AnimalPatient animalPatient : animalPatients) {
+				if(animalPatient.getName().equals(name) && animalPatient.getOwner().equals(owner) && animalPatient.getSpecies().equals(species)) {
+					return true;
+				}
 			}
 		}
 		return false;
 	}
 
 	public void printAnimalPatientsList() {
-		for(AnimalPatient animalPatient: this.getAnimalPatients()) {
-			System.out.printf("환자 이름: %s \t", animalPatient.getName());
-			System.out.printf("주인 이름: %s \t", animalPatient.getOwner());
-			System.out.printf("종: %s \t", animalPatient.getSpecies());
-			System.out.printf("담당 의사: %s \t", animalPatient.getDoctorInCharge());
-			System.out.printf("입원일: %s \t", animalPatient.getHospitalizationDate());
-			System.out.printf("퇴원일: %s \t", animalPatient.getDischargeDate());
-			System.out.printf("식별 번호: %s \t\n", animalPatient.getNumber());
+		for(AnimalPatient[] animalPatients: this.getAnimalPatients()) {
+			for(AnimalPatient animalPatient : animalPatients) {
+				System.out.printf("환자 이름: %s \t", animalPatient.getName());
+				System.out.printf("주인 이름: %s \t", animalPatient.getOwner());
+				System.out.printf("종: %s \t", animalPatient.getSpecies());
+				System.out.printf("담당 의사: %s \t", animalPatient.getDoctorInCharge());
+				System.out.printf("입원일: %s \t", animalPatient.getHospitalizationDate());
+				System.out.printf("퇴원일: %s \t", animalPatient.getDischargeDate());
+				System.out.printf("식별 번호: %s \t\n", animalPatient.getNumber());
+			}
 		}
 	}
 
@@ -271,12 +275,13 @@ public class Nurse {
 
 		System.out.print("이름 혹은 식별번호:  ");
 		String input = scanner.nextLine();
-		int index = this.findIndex(input);
-		if(index < 0) {
+		int[] index = this.findIndex(input);
+		if(index[0] < 0 || index[1] < 0) {
 			System.out.println(input + "은/는 존재하지 않는 환자입니다.");
 			return;
 		}
 
 		//사료
+		int n = this.getFeedCounter()[index[0]][index[1]];
 	}
 }
