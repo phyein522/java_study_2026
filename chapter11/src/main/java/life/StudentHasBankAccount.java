@@ -14,20 +14,14 @@ public class StudentHasBankAccount {
 	private final BankAccount bankAccount;
 
 	public void income(int money) {
-		if(money < 0) {
-			throw new ParamMoneyException("잘못된 매개값: " + money);
-		}
+		//if(money < 0) { throw new ParamMoneyException("잘못된 매개값: " + money); }
 		this.getBankAccount().setMoney(this.getBankAccount().getMoney() + money);
 		System.out.println("income: " + this.getCurrentMoney());
 	}
 
 	public int outcome(int money) {
-		if(money < 0) {
-			throw new ParamMoneyException("잘못된 매개값: " + money);
-		}
-		if(this.getCurrentMoney() < money) {
-			throw new ParamMoneyException("잔액 부족: " + (this.getCurrentMoney() - money));
-		}
+		//if(money < 0) { throw new ParamMoneyException("잘못된 매개값: " + money); }
+		//if(this.getCurrentMoney() < money) { throw new ParamMoneyException("잔액 부족: " + (this.getCurrentMoney() - money)); }
 		this.getBankAccount().setMoney(this.getCurrentMoney() - money);
 		System.out.println("outcome: " + this.getCurrentMoney() + ", " + money);
 		return money;

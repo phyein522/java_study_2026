@@ -1,7 +1,7 @@
 package life;
 
-import banking.BankAccount;
-import banking.Student;
+import banking.*;
+import life.*;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -87,4 +87,38 @@ public class TestStudentHasBankAccount {
 		stuBank.outcome(10000);
 		assertThat(stuBank.getCurrentMoney()).isEqualTo(90000);
 	}
+
+	@Test
+	public void TestSendMoney() {
+		StudentHasBankAccount stuBank1 = new StudentHasBankAccount(
+				new Student("홍길동", "hhh1111")
+				, new BankAccount("77-777-77-77", "홍길동")
+		);
+		StudentHasBankAccount stuBank2 = new StudentHasBankAccount(
+				new Student("이순신", "lss9876")
+				, new BankAccount("567-372-2983", "이순신")
+		);
+		IMachine allGoodMachine = new IMachine() {
+			@Override
+			public boolean isActive() throws MachineNotWorkingException {
+				return true;
+			}
+		};
+		IMachine brokenMachine = new IMachine() {
+			@Override
+			public boolean isActive() throws MachineNotWorkingException {
+				return false;
+			}
+		};
+		LifeOfStudentWithBank losw = new LifeOfStudentWithBank(allGoodMachine);
+		losw.sendMoney(stuBank1, stuBank2, 50000);
+		assertThat(stuBank1.getBankAccount().getMoney()).isEqualTo(-50000);
+		assertThat(stuBank2.getBankAccount().getMoney()).isEqualTo(50000);
+
+		LifeOfStudentWithBank brokenSWB = new LifeOfStudentWithBank(brokenMachine);
+		brokenSWB.sendMoney(stuBank2, stuBank1, 10000);
+		assertThat(stuBank1.getBankAccount().getMoney()).isEqualTo(-50000);
+		assertThat(stuBank2.getBankAccount().getMoney()).isEqualTo(50000);
+	}
+
 }
