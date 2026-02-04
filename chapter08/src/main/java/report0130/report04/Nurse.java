@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 @Getter
@@ -14,7 +16,7 @@ public class Nurse {
 //	private int[][] counter = new int[0][2];	//tookMedicine, visited
 	private int[][] takeMedicineCounter = new int[7][0];
 	private int[][] visitCounter = new int[7][0];
-	private int[][] feedCounter = new int[7][0];
+	private FeedList[][] feedLists = new FeedList[7][0];
 
 	public Nurse() {
 //		this.startWork();
@@ -29,8 +31,8 @@ public class Nurse {
 	private void setVisitCounter(int[] visitCounter, int index) {
 		this.visitCounter[index] = visitCounter;
 	}
-	private void setFeedCounter(int[] feedCounter, int index) {
-		this.feedCounter[index] = feedCounter;
+	private void setFeedLists(FeedList[] feedLists, int index) {
+		this.feedLists[index] = feedLists;
 	}
 
 	public void record(Animal animal) {
@@ -132,9 +134,9 @@ public class Nurse {
 		System.arraycopy(this.getVisitCounter()[index], 0, newVisitCounter, 0, this.getVisitCounter()[index].length);
 		this.setVisitCounter(newVisitCounter, index);
 
-		int[] newFeedCounter = new int[this.getFeedCounter()[index].length + 1];
-		System.arraycopy(this.getFeedCounter()[index], 0, newFeedCounter, 0, this.getFeedCounter()[index].length);
-		this.setFeedCounter(newFeedCounter, index);
+//		FeedList[] newFeedLists = new FeedList[this.getFeedLists()[index].length + 1];
+//		System.arraycopy(this.getFeedLists()[index], 0, newFeedLists, 0, this.getFeedLists()[index].length);
+//		this.setFeedLists(newFeedLists, index);
 	}
 
 	public void takeMedicine() {
@@ -280,8 +282,51 @@ public class Nurse {
 			System.out.println(input + "은/는 존재하지 않는 환자입니다.");
 			return;
 		}
+		AnimalPatient animalPatient = this.getAnimalPatients()[index[0]][index[1]];
 
-		//사료
-		int n = this.getFeedCounter()[index[0]][index[1]];
+		FeedList newFeedList = new FeedList(time, gram, animalPatient);
+		int idx = switch(newFeedList.getAnimalPatient().getSpecies()) {
+			case AnimalPatient.CAT -> 0;
+			case AnimalPatient.PARROT -> 1;
+			case AnimalPatient.LARGE_DOG -> 2;
+			case AnimalPatient.SMALL_DOG -> 3;
+			case AnimalPatient.RABBIT -> 4;
+			case AnimalPatient.CHICKEN -> 5;
+			case AnimalPatient.HEDGEHOG -> 6;
+			default -> -1;
+		};
+		FeedList[] newFeedLists = new FeedList[this.getFeedLists()[idx].length + 1];
+		System.arraycopy(this.getFeedLists()[idx], 0, newFeedLists, 0, this.getFeedLists()[idx].length);
+		newFeedLists[this.getFeedLists()[idx].length] = newFeedList;
+		this.setFeedLists(newFeedLists, idx);
+	}
+
+	public void printFeedList() {
+		for(FeedList[] feedList : this.getFeedLists()) {
+			Arrays.sort(feedList, new Comparator<FeedList>() {
+				@Override
+				public int compare(FeedList fl1, FeedList fl2) {
+					int result = fl1.getTime().compareTo(fl2.getTime());
+					if(result != 0) {
+						return result;
+					}
+
+					result = fl1.getAnimalPatient().getNumber().compareTo(fl2.getAnimalPatient().getNumber());
+					if(result != 0) {
+						return result;
+					}
+
+					return 0;
+				}
+			});
+		}
+		for(FeedList[] feedLists : this.getFeedLists()) {
+			for(FeedList feedList : feedLists) {
+				System.out.printf("시간: %s \t", feedList.getTime());
+				System.out.printf("양: %s (g) \t", feedList.getGram());
+				System.out.printf("환자 이름: %s \t", feedList.getAnimalPatient().getName());
+				System.out.printf("식별 번호: %s \t\n", feedList.getAnimalPatient().getNumber());
+			}
+		}
 	}
 }

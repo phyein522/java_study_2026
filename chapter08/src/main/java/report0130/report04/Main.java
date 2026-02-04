@@ -108,7 +108,7 @@ public class Main {
 		Nurse nurse = new Nurse();
 		while(true) {
 			System.out.println("\n\n----------------------------------------------------------------------------------------------------");
-			System.out.println("1. 환자 기록 | 2. 약 먹이기 | 3. 환자 면회 | 4. 환자 목록 확인 | 5. 종료 | 6. 동물 목록 | 7. 동물 추가");
+			System.out.println("1. 환자 기록 | 2. 약 먹이기 | 3. 환자 면회 | 4. 환자 목록 확인 | 5. 사료 주기 | 6. 사료 주기 기록 | 7. 종료 | 8. 동물 목록 | 9. 동물 추가");
 			System.out.println("----------------------------------------------------------------------------------------------------");
 			System.out.print(">>  ");
 			String select = scanner.nextLine();
@@ -126,12 +126,18 @@ public class Main {
 					nurse.printAnimalPatientsList();
 					break;
 				case "5":
-					System.out.println("종료합니다.");
-					return;
+					nurse.feed();
+					break;
 				case "6":
-					this.printAnimalsList();
+					nurse.printFeedList();
 					break;
 				case "7":
+					System.out.println("종료합니다.");
+					return;
+				case "8":
+					this.printAnimalsList();
+					break;
+				case "9":
 					this.addAnimal();
 					break;
 			}
