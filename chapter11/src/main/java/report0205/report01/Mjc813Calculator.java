@@ -6,7 +6,7 @@ public class Mjc813Calculator {
 		// arrs 값들의 모든 합을 구해야 합니다.
 		// 다만 arrs 배열이 null 일 수 있으므로 예외처리를 이곳이든 이곳을 호출하는 메소드에서든 꼭 해야 합니다.
 		/*
-		if(arrs == null || arrs.length == 0) {
+		if(arrs == null) {
 			throw new NullPointerException("매개값 null");
 		}
 		for(Integer n : arrs) {
