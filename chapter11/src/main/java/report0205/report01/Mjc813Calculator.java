@@ -9,12 +9,12 @@ public class Mjc813Calculator {
 		if(arrs == null || arrs.length == 0) {
 			throw new NullPointerException("매개값 null");
 		}
-		for(int i = 0; i < arrs.length; i++) {
-			if(arrs[i] == null) {
+		for(Integer n : arrs) {
+			if(n == null) {
 				throw new NullPointerException("매개값에 null 포함됨");
-//				continue;
+				//continue;
 			}
-			result += arrs[i];
+			result += n;
 		}
 		*/
 		try {
