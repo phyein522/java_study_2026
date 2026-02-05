@@ -65,4 +65,19 @@ public class Mjc813Calculator {
 		}
 		return result;
 	}
+
+	public long strongSum(Integer... arrs) {
+		long result = 0L;
+		//예외에도 return;
+		if(arrs == null) {
+			return result;
+		}
+		for(Integer n : arrs) {
+			if(n == null) {
+				continue;
+			}
+			result += n;
+		}
+		return result;
+	}
 }
