@@ -1,12 +1,19 @@
 package report0205.report02;
 
+//import lombok.AllArgsConstructor;
+//import lombok.NoArgsConstructor;
+
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class Mjc813GameMachineV1 {
 	private int battery = 0;
 	private MarioGame game1;
 
 	public Mjc813GameMachineV1(int battery, MarioGame game1) {
-		this.battery = battery;
+		this.battery = battery > 100 ? 100 : battery < 0 ? 0 : battery;
 		this.game1 = game1;
+	} public Mjc813GameMachineV1(MarioGame game1, int battery) {
+		this(battery, game1);
 	} public Mjc813GameMachineV1(MarioGame game1) {
 		this.game1 = game1;
 	} public Mjc813GameMachineV1() {
