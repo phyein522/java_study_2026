@@ -4,15 +4,27 @@ public class UseObject {
 	private String id = "";
 	private String name = "";
 
+	public String getId() { return this.id; }
+	public String getName() { return this.name; }
+	public void setId(String id) { this.id = id; }
+	public void setName(String name) { this.name = name; }
+
+	public UseObject() {}
+	public UseObject(String id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
 	@Override
 	public Object clone() {
-		return this;
+//		return this;
+		return new UseObject(this.getId(), this.getName());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof UseObject uobj) {
-			if(this.id.equals(uobj.id)) {
+			if(this.getName().equals(uobj.getName())) {
 				return true;
 			}
 		}
@@ -21,14 +33,14 @@ public class UseObject {
 
 	@Override
 	public int hashCode() {
-		return Integer.parseInt(this.id);
+		return Integer.parseInt(this.getId()) + this.getName().hashCode();
 	}
 
 	@Override
 	public String toString() {
 		return "UseObject{" +
-				"id:" + this.id +
-				", name:" + this.name +
+				"id:" + this.getId() +
+				", name:" + this.getName() +
 				"}";
 	}
 }
